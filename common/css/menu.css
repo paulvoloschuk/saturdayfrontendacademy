@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css?family=Arsenal');
+/* Page identity */
+body{
+  font-size: 22px;
+  font-family: 'Arsenal', sans-serif;
+}
+
+.dark{
+  color: rgb(213, 232, 240);
+  text-shadow: 1px 1px 5px rgba(0,0,0,.3);
+}
+.light{
+  color: rgb(60, 64, 68);
+}
+
+.homework2{
+  background:rgb(54, 59, 62) url(../../homework2/bg.png);
+}
+
+
+/* content */
+h1{
+  padding: 0 3em;
+  width: 80%;
+  min-width: 480px;
+  max-width: 1100px;
+  font-weight: normal;
+}
+.date{
+    float:right;
+    font-size: 80%;
+    position: relative;
+    top:.4em;
+}
+.choose-box{
+ padding: 1em;
+}
+.container{
+  display:flex;
+  justify-content:center;
+  flex-flow: row wrap;
+}
+.container a{
+  display:block;
+  width:200px;
+  height:400px;
+  box-shadow: 0 0 1px 1px rgba(0,0,0,.2), inset 0 0 1px 1px rgba(255,255,255,.2);
+  text-align: center;
+  color:rgb(234, 236, 213);
+  text-decoration: none;
+  transition:all 0.3s ease-in-out;
+  text-shadow: 1px 1px 5px rgba(0,0,0,.8), 0 0 10px rgba(0,0,0,.9);
+}
+.container a span{
+  position: relative;
+  top:calc(100% - 4em);
+  width:80%;
+  display: inline-block;
+  padding-bottom: 1em;
+  transition:all 0.3s ease-in-out;
+  text-transform: uppercase;
+}
+.container a span::after,
+.container a span::before{
+  content:"";
+  display:block;
+  position:absolute;
+  bottom:0;
+  border-bottom: 1px solid white;
+  width:0%;
+  height:0;
+  transition:all 0.3s ease-in-out;
+}
+.container a span::before{
+  right:50%;
+}
+.container a span::after{
+  left:50%;
+}
+.container a:hover span{
+  top:calc(100% - 5em);
+  padding-bottom: 2em;
+}
+.container a:hover span::after,
+.container a:hover span::before{
+  width:50%;
+}
+.container a:hover ~ a{
+  opacity:0.3;
+}
