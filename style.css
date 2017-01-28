@@ -1,0 +1,103 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css?family=Cormorant|Marck+Script|Open+Sans+Condensed:300');
+
+
+/* Regular */
+body{
+  margin:0;
+  padding:0;
+  background:#f9f9f9;
+  color:#333333;
+  font-family:'Open Sans Condensed';
+}
+.wrapper{
+  min-width:690px;
+  width:85%;
+  max-width:1000px;
+  margin: 0 auto;
+}
+h1 span{
+  float:right;
+  font-size:70%;
+}
+h2{
+  border-top: 2px solid #333333;
+  border-bottom: 2px solid #333333;
+  margin:1em 0;
+  padding: 1em;
+  color:#f7583b;
+  text-shadow: 1px 1px 0 #f9f9f9;
+  font-style:italic;
+  background:url(caption.webp);
+}
+
+article{
+  padding:20px;
+}
+.panel{
+  margin: 0 0 10px 0;
+}
+input{
+  display:none;
+}
+label{
+  margin: 0 10px;
+  padding: 3px 10px;
+  border:1px solid transparent;
+  cursor:pointer;
+}
+input:checked + label{
+  border:1px dotted #333333;
+}
+label:hover{
+  border:1px solid #333333;
+}
+.field{
+  border:1px dashed #f7583b;
+  padding: 5px 20px;
+  text-align: justify;
+}
+.exercise1 span{
+  display: block;
+  text-align: right;
+  font-weight: bold;
+
+}
+.cormorant{
+  font: 18px 'Cormorant';
+}
+.opensans{
+  font: 15px 'Open Sans Condensed';
+}
+.marck{
+  font: 18px 'Marck Script';
+}
+
+.exercise2{
+  text-align: center;
+}
+.exercise2 div{
+  display:inline-block;
+  background:rgba(0,0,0,0.2);
+}
+.exercise2 > div{
+  height:300px;
+  width:500px;
+  position:relative;
+  overflow:hidden;
+  border:3px solid black;
+  cursor: crosshair;
+}
+.exercise2 div > div{
+  width:90%;
+  height:90%;
+  position: absolute;
+    box-shadow: 0 0 45px rgba(0,0,0,0.3);
+    left:0;
+    top:0;
+}
+
+area{
+  cursor:pointer;
+  outline-color: red;
+}
