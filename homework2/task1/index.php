@@ -11,7 +11,7 @@
 
   </head>
   <body>
-
+    <? include "../common/php/upper_menu.php"; ?>
 
   </body>
 </html>

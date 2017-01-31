@@ -6,8 +6,8 @@
     <script  src="http://code.jquery.com/jquery-3.1.1.slim.min.js"  integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
   </head>
   <body>
-    <div class="wrapper">
-      <h1>Домашнее задание от 21.01.17<span>Волощук Павел</span></h1>
+    <? include "../common/php/upper_menu.php"; ?>
+    <div id="project" class="wrapper">
       <section>
         <h2>Задание 1: Верстка с @font-face</h2>
         <article>
