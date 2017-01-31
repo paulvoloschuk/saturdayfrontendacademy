@@ -1,0 +1,75 @@
+/* Fonts */
+
+
+/* Regular */
+body{
+  margin:0;
+  padding:0;
+  background:#f9f9f9;
+  color:#333333;
+  font-family:'Open Sans Condensed';
+}
+#project.wrapper{
+  min-width:690px;
+  width:85%;
+  max-width:1000px;
+  margin: 0 auto;
+}
+#project h1 span{
+  float:right;
+  font-size:70%;
+}
+#project h2{
+  border-top: 2px solid #333333;
+  border-bottom: 2px solid #333333;
+  margin:1em 0;
+  padding: 1em;
+  color:#f7583b;
+  text-shadow: 1px 1px 0 #f9f9f9;
+  font-style:italic;
+  background:url(caption.webp);
+}
+
+#project article{
+  padding:20px;
+}
+#project .panel{
+  margin: 0 0 10px 0;
+}
+#project .field{
+  border:1px dashed #f7583b;
+  padding: 5px 20px;
+  text-align: justify;
+}
+#formula table{
+  margin:0 auto;
+}
+#formula{
+  display: block;
+  padding: 20px 40px;
+  text-align: center;
+}
+.view{
+  position:relative;
+  padding-left: 6em;
+}
+.view p{
+  position:absolute;
+  top:0.4em;
+  left:0.2em;
+  font-size:150%;
+  font-weight: bold;
+}
+#result{
+  min-width: 3em;
+  display: inline-block;
+}
+#formula label{
+  display:block;
+}
+#formula label span{
+  min-width: 30px;
+  display: inline-block;
+  text-align: right;
+  margin: 0 0.5em 0 0;
+}

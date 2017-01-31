@@ -1,25 +1,113 @@
 <!DOCTYPE html>
 <html>
   <head>
-
-    <title>Homework2</title>
-
-    <link rel="stylesheet" href="../common/css/normalize.css">
-    <link rel="stylesheet" href="../common/css/menu.css">
-
-
+    <meta charset="utf-8">
+    <title>Домашнее задание от 21.01.17</title>
+    <link rel="stylesheet" href="style.css">
+    <script  src="http://code.jquery.com/jquery-3.1.1.slim.min.js"  integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
   </head>
-  <body class="choose-box homework2 dark">
+  <body>
 
-    <h1>Homework2 <span class="date">28.01.17</span></h1>
-    <div class="container">
-      <a href="#" style="background-image:url(img/task1.jpg);" title="task1"><span>Task1</span></a>
-      <a href="#" style="background-image:url(img/task2.jpg);" title="task2"><span>Task2</span></a>
-      <a href="#" style="background-image:url(img/task3.jpg);" title="task3"><span>Task3</span></a>
-      <a href="#" style="background-image:url(img/task4.jpg);" title="task4"><span>Task4</span></a>
+    <div id="project" class="wrapper">
+      <section>
+        <h2>Задание 1: Расчет формулы</h2>
+        <article>
+          <p>Введите данные в поля формулы</p>
+          <div class="field exercise1">
+            <form id="formula" onchange="CountF();">
+              <table>
+                <tr>
+                  <td rowspan="2" class="view">
+                    <p>
+                      <span id="result">h</span>
+                      =
+                    </p>
+                    <img src="formula.svg" alt="formula" width="160px">
+                  </td>
+                  <td>
+                    <label><span> V<sub>0</sub>: </span><input name="varV0" type="text" pattern="[0-9]" maxlength="16"></label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label><span> t: </span><input name="varT" type="text" pattern="[0-9]" maxlength="16"></label>
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </div>
+
+        </article>
+      </section>
+      <section>
+        <h2>Задание 2: Использование &lt;map&gt;, &lt;area&gt;</h2>
+        <article>
+          <p>Наведите курсор на интересующие компоненты материнской карты. <br />Недостаток карты в том что она скейлится вместе с картинкой, подстраиваясь например под размеры wrapper.</p>
+          <img src="motherboard.webp" alt="Материнская нарта" usemap="#navigation" />
+          <map id="navigation" name="navigation">
+            <area shape="poly" coords="606,360,587,406,587,446,614,488,769,491,772,357" href="#" title="Сокет">
+            <area shape="poly" coords="444,680,447,552,404,506,224,508,221,633,265,680" href="#" title="Северный мост под радиатором">
+            <area shape="poly" coords="485,571,486,683,905,680,908,573" href="#" title="Двухканальный контроллер ОЗУ">
+            <area shape="poly" coords="583,274,542,238,543,169,869,175,908,208,838,274" href="#" title="Южный мост под радиатором">
+            <area shape="poly" coords="569,702,571,734,714,734,716,704" href="#" title="Разьем питания карты">
+            <area shape="poly" coords="151,713,153,743,456,745,456,707" href="#" title="SATA контроллеры">
+            <area shape="poly" coords="408,169,433,169,444,487,398,492" href="#" title="PCI">
+            <area shape="poly" coords="222,487,274,486,260,168,238,169" href="#" title="PCI">
+            <area shape="poly" coords="118,169,142,168,155,487,113,486" href="#" title="AGP">
+            <area shape="poly" coords="463,172,466,242,488,246,490,173" href="#" title="PCI Express">
+            <area shape="poly" coords="296,169,317,171,322,239,296,241" href="#" title="PCI Express">
+            <area shape="poly" coords="174,168,206,172,205,241,177,242" href="#" title="PCI Express">
+          </map>
+
+        </article>
+      </section>
+      <section>
+        <h2>Задание 3: Позиционирование елементов на странице</h2>
+        <article>
+
+          <p>Поводите курсором по полю.</p>
+          <div id="log">
+            ----
+          </div>
+
+          <div class="field exercise2">
+            <div id="parallax-base">
+              <div>
+                <div>
+                  <div>
+                    <div>
+                      <div>
+                        <div>
+                          <div>
+                            <div>
+                              <div>
+                                <div>
+                                  <div>
+                                    <div>
+                                      <div>
+                                        <div>
+
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </article>
+      </section>
     </div>
-
-    <a href="#">Return</a>
-
+    <script src="user.js"></script>
+    //
   </body>
 </html>
