@@ -17,11 +17,20 @@ function Calculator(){
   }
 
   this.addChar = function(char){
+    // Wrong char input assert
+    if(char == '0' && eval(this.active_var + " == ''")) return 0;
+    if(char == '.' && eval(this.active_var + ".length > 13")) { return 0;}
+    if(char == '.' && eval(this.active_var + " == ''")){
+      eval(this.active_var + " = '0.'");
+      this.fieldRefresh();
+      return 0;
+    }
     if(eval(this.active_var + '.length < 15')){
       eval(this.active_var + ' += char;');
       this.fieldRefresh();
       this.result = '';
     }
+
   }
 
   this.addAction = function(action){
