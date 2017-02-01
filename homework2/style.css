@@ -9,6 +9,9 @@ body{
   color:#333333;
   font-family:'Open Sans Condensed';
 }
+*:focus{
+  outline:none;
+}
 #project.wrapper{
   min-width:690px;
   width:85%;
@@ -72,4 +75,108 @@ body{
   display: inline-block;
   text-align: right;
   margin: 0 0.5em 0 0;
+}
+#alcohol_access{
+  border:1px solid lightgray;
+  display: inline-block;
+  height:1.25em;
+  line-height: 1.1em;
+  padding:0 1em;
+}
+#alcohol_access.none{
+  display:none;
+}
+#alcohol_access.forbidden{
+  border-color: darkred;
+  background:pink;
+  color:darkred;
+}
+#alcohol_access.undefined{
+  color:steelblue;
+  border-color:steelblue;
+  background:lightblue;
+}
+#alcohol_access.accept{
+  color:darkgreen;
+  border-color: darkgreen;
+  background:lightgreen;
+}
+
+.exercise2{
+  text-align: center !important;
+}
+#calculator{
+  margin:3em auto;
+  background: rgb(233, 236, 241);
+  display: inline-block;
+  max-width: 153px;
+  border: 3px solid gray;
+  user-select:none;
+}
+#calculator .caption{
+  margin:0;
+  padding:2px 5px;
+  font-size: 9px;
+
+}
+#text-field{
+  background: rgb(201, 218, 230);
+  padding: 0.3em 1em;
+  font-family: monospace;
+  border:1px solid gray;
+  border-left: none;
+  border-right: none;
+  position:relative;
+}
+#text-field p{
+  margin:0;
+  text-align: right;
+}
+.editable{
+  font-weight: bold;
+  word-wrap: break-word;
+}
+.memory{
+  font-size: 70%;
+  opacity:0.6;
+}
+#calculator .controls{
+  display: flex;
+  flex-wrap: wrap;
+}
+#calculator .controls button{
+  display: block;
+  margin: 1px;
+  width:40px;
+  height:30px;
+  background:transparent;
+  box-shadow: inset 0 0 0 1px white;
+  border:1px solid lightgray;
+}
+#calculator .controls button:hover{
+  background: white;
+}
+#calculator .controls button:active{
+  background: rgb(201, 218, 230);
+  box-shadow: none;
+}
+#calculator .controls button:disabled{
+  opacity:0.5;
+  background:transparent;
+  box-shadow: inset 0 0 0 1px white;
+  border:1px solid lightgray;
+}
+#calculator .controls button:nth-child(4n){
+  width: 25px;
+}
+#calculator span{
+  position:absolute;
+  top:0.4em;
+  left:0.3em;
+  opacity: 0.7;
+  font-size: 80%;
+  display: none;
+}
+#calculator .mmr span{
+  display: block;
 }

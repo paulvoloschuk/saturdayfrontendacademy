@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <title>Домашнее задание от 21.01.17</title>
     <link rel="stylesheet" href="style.css">
-    <script  src="http://code.jquery.com/jquery-3.1.1.slim.min.js"  integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
+        <script src="user.js"></script>
+
   </head>
   <body>
 
@@ -25,12 +26,12 @@
                     <img src="formula.svg" alt="formula" width="160px">
                   </td>
                   <td>
-                    <label><span> V<sub>0</sub>: </span><input name="varV0" type="text" pattern="[0-9]" maxlength="16"></label>
+                    <label><span> V<sub>0</sub>: </span><input name="varV0" type="text" pattern="[0-9]" maxlength="4"></label>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <label><span> t: </span><input name="varT" type="text" pattern="[0-9]" maxlength="16"></label>
+                    <label><span> t: </span><input name="varT" type="text" pattern="[0-9]" maxlength="4"></label>
                   </td>
                 </tr>
               </table>
@@ -40,74 +41,63 @@
         </article>
       </section>
       <section>
-        <h2>Задание 2: Использование &lt;map&gt;, &lt;area&gt;</h2>
+        <h2>Задание 2: Анализатор возраста</h2>
         <article>
-          <p>Наведите курсор на интересующие компоненты материнской карты. <br />Недостаток карты в том что она скейлится вместе с картинкой, подстраиваясь например под размеры wrapper.</p>
-          <img src="motherboard.webp" alt="Материнская нарта" usemap="#navigation" />
-          <map id="navigation" name="navigation">
-            <area shape="poly" coords="606,360,587,406,587,446,614,488,769,491,772,357" href="#" title="Сокет">
-            <area shape="poly" coords="444,680,447,552,404,506,224,508,221,633,265,680" href="#" title="Северный мост под радиатором">
-            <area shape="poly" coords="485,571,486,683,905,680,908,573" href="#" title="Двухканальный контроллер ОЗУ">
-            <area shape="poly" coords="583,274,542,238,543,169,869,175,908,208,838,274" href="#" title="Южный мост под радиатором">
-            <area shape="poly" coords="569,702,571,734,714,734,716,704" href="#" title="Разьем питания карты">
-            <area shape="poly" coords="151,713,153,743,456,745,456,707" href="#" title="SATA контроллеры">
-            <area shape="poly" coords="408,169,433,169,444,487,398,492" href="#" title="PCI">
-            <area shape="poly" coords="222,487,274,486,260,168,238,169" href="#" title="PCI">
-            <area shape="poly" coords="118,169,142,168,155,487,113,486" href="#" title="AGP">
-            <area shape="poly" coords="463,172,466,242,488,246,490,173" href="#" title="PCI Express">
-            <area shape="poly" coords="296,169,317,171,322,239,296,241" href="#" title="PCI Express">
-            <area shape="poly" coords="174,168,206,172,205,241,177,242" href="#" title="PCI Express">
-          </map>
-
+          <p>Впишите возраст в поле.</p>
+          <form id="age" onsubmit="return false;" >
+            <input onchange="CountA();" name="age" id="alcohol_age" type="text" placeholder="Возраст">
+            <label id="alcohol_access" class="none"></label>
+          </form>
         </article>
       </section>
       <section>
-        <h2>Задание 3: Позиционирование елементов на странице</h2>
+        <h2>Задание 3: Калькулятор</h2>
         <article>
 
-          <p>Поводите курсором по полю.</p>
-          <div id="log">
-            ----
-          </div>
+          <p>Кажется ничего обьснять не нужно.</p>
 
           <div class="field exercise2">
-            <div id="parallax-base">
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <div>
-                          <div>
-                            <div>
-                              <div>
-                                <div>
-                                  <div>
-                                    <div>
-                                      <div>
-                                        <div>
 
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+            <div id="calculator">
+              <form onsubmit="return false;">
+                <p class="caption">Calculator</p>
+                <div id="text-field">
+                  <p class="memory">clear</p>
+                  <p class="editable">0</p>
+                  <span>M</span>
                 </div>
-              </div>
+                <div class="controls">
+                  <button onclick="Calculator.clear();">CE</button>
+                  <button onclick="Calculator.clearAll();">C</button>
+                  <button onclick="Calculator.memory();">M</button>
+                  <button onclick="Calculator.addAction('^');">^</button>
+                  <button onclick="Calculator.addChar(1);">1</button>
+                  <button onclick="Calculator.addChar(2);">2</button>
+                  <button onclick="Calculator.addChar(3);">3</button>
+                  <button onclick="Calculator.addAction('+');">+</button>
+                  <button onclick="Calculator.addChar(4);">4</button>
+                  <button onclick="Calculator.addChar(5);">5</button>
+                  <button onclick="Calculator.addChar(6);">6</button>
+                  <button onclick="Calculator.addAction('-');">-</button>
+                  <button onclick="Calculator.addChar(7);">7</button>
+                  <button onclick="Calculator.addChar(8);">8</button>
+                  <button onclick="Calculator.addChar(9);">9</button>
+                  <button onclick="Calculator.addAction('*');">*</button>
+                  <button onclick="Calculator.addChar('.');">.</button>
+                  <button onclick="Calculator.addChar(0);">0</button>
+                  <button id="count_button" disabled onclick="Calculator.count();">=</button>
+                  <button onclick="Calculator.addAction('/');">/</button>
+                </div>
+              </form>
             </div>
+            <script src="calculator.js"></script>
+
+
           </div>
 
         </article>
       </section>
     </div>
-    <script src="user.js"></script>
     //
   </body>
 </html>
