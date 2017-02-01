@@ -1,5 +1,5 @@
 /* Fonts */
-
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
 
 /* Regular */
 body{
@@ -7,7 +7,7 @@ body{
   padding:0;
   background:#f9f9f9;
   color:#333333;
-  font-family:'Open Sans Condensed';
+  font-family: 'Ubuntu', sans-serif;
 }
 *:focus{
   outline:none;
@@ -27,7 +27,7 @@ body{
   border-bottom: 2px solid #333333;
   margin:1em 0;
   padding: 1em;
-  color:#f7583b;
+  color:#3b97f7;
   text-shadow: 1px 1px 0 #f9f9f9;
   font-style:italic;
   background:url(caption.webp);
@@ -40,7 +40,7 @@ body{
   margin: 0 0 10px 0;
 }
 #project .field{
-  border:1px dashed #f7583b;
+  border:1px dashed #3b97f7;
   padding: 5px 20px;
   text-align: justify;
 }
@@ -153,6 +153,10 @@ body{
   box-shadow: inset 0 0 0 1px white;
   border:1px solid lightgray;
 }
+#calculator .controls button:nth-child(4n){
+  width: 25px;
+  background: rgba(0, 0, 0, 0.06);
+}
 #calculator .controls button:hover{
   background: white;
 }
@@ -165,9 +169,6 @@ body{
   background:transparent;
   box-shadow: inset 0 0 0 1px white;
   border:1px solid lightgray;
-}
-#calculator .controls button:nth-child(4n){
-  width: 25px;
 }
 #calculator span{
   position:absolute;
