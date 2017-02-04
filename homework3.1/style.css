@@ -1,1 +1,29 @@
 body,html{width:100%;height:100%;}
+body{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  background:rgb(51, 42, 42);
+}
+#checkers{
+  display:inline-block;
+  background: url(img/wood-light.jpg);
+  background-size: 30% 30%;
+  padding: 2em;
+  border: 0.2em solid transparent;
+  box-shadow: inset 0 0 0 0.1em rgb(51, 42, 42);
+}
+#field{
+  border:0.1em solid rgb(51, 42, 42);
+}
+.row{
+  display: flex;
+}
+.cell{
+  width: 3em;
+  height: 3em;
+}
+.row:nth-of-type(even) .cell:nth-child(even),
+.row:nth-of-type(odd) .cell:nth-child(odd){
+  background:url(img/wood-dark.jpg);
+}
