@@ -1,25 +1,31 @@
-body,html{width:100%;height:100%;}
+body,html{width: 100%; height: 100%;}
 body{
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgb(51, 42, 42) url(img/ignasi_pattern_s.png);
 }
-#debug{
-  position: fixed;
-  top: 0;
-  left: 0;
-  color: rgb(230, 228, 210);
-  padding: 10px;
-}
-#checkers{
+#container{
   display: inline-block;
   background: url(img/wood-light.jpg);
   background-size: 30% 30%;
+  position: relative;
   padding: 3em;
   border: 0.2em solid transparent;
   box-shadow: inset 0 0 0 0.1em rgb(51, 42, 42), 1em 1em 0.4em rgba(0,0,0,.6);
 }
+#container > p{
+  position: absolute;
+  text-align: center;
+  z-index: 10;
+  width: 100%;
+  left: 0;
+  color:rgb(232, 224, 189);
+}
+#container > p:last-of-type{bottom: 100%;}
+#container > p:first-of-type{top: 100%;}
+#container.player1 > p:last-of-type{opacity: 0.2;}
+#container.player2 > p:first-of-type{opacity: 0.2;}
 #field{
   border: 0.1em solid rgb(51, 42, 42);
 }
@@ -29,6 +35,7 @@ body{
 .cell{
   width: 8vmin;
   height: 8vmin;
+  position:relative;
 }
 .cell.focus::after,
 .cell.move::after,
@@ -47,13 +54,39 @@ body{
 }
 .row:nth-of-type(even) .cell:nth-child(even),
 .row:nth-of-type(odd) .cell:nth-child(odd){
-  background:url(img/wood-dark.jpg);
+  background: url(img/wood-dark.jpg);
 }
+.s-tooltip,
+.n-tooltip{
+  display: block;
+  position: absolute;
+  color: rgb(51, 42, 42);
+  box-sizing: border-box;
+  font: 130% Verdana;
+  pointer-events:none;
+}
+.row .cell:first-child .n-tooltip,
+.row .cell:last-child .n-tooltip{
+  height: 100%;
+  line-height: 8vmin;
+  padding: 0 0.3em;
+}
+.row:first-of-type .s-tooltip,
+.row:last-of-type .s-tooltip{
+  width: 100%;
+  text-align: center;
+  padding: 0.3em 0;
+}
+.row:first-of-type .s-tooltip{bottom: 100%;}
+.row:last-of-type .s-tooltip{top: 100%;}
+.row .cell:first-child .n-tooltip{right:100%;}
+.row .cell:last-child .n-tooltip{left:100%;}
 #figures{
   position: relative;
 }
 #figures .regular,
 #figures .queen{
+  z-index: 2;
   width: 6vmin;
   height: 6vmin;
   margin: 1vmin;
