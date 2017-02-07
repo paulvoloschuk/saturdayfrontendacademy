@@ -15,6 +15,7 @@ function Checkers(global_container){
   this.field = Array();
   this.current_figures = Array();
   this.current_actions = Array();
+  this.current_select = false;
   this.current_player = 0;
 
   // Constructor
@@ -59,29 +60,49 @@ function Checkers(global_container){
 
   // Generate HTML field & start events
   this.GenerateField = function(){
-    this.Debug('Generating field');
-    var HTML_field, HTML_figures, HTML_tooltip;
-    for (var y = 0; y < this.size_y; y++) {
+    this.Debug('Generating field & figures');
+    var HTML_field = '', HTML_figures = '', HTML_tooltip = '';
+    for(var y = 0; y <= this.size_y; y++) {
       HTML_field += '<div data-id="' + y + '" class="row">';
-      for (var x = 0; x < this.size_x; x++) {
-        HTML_field += '<div class="cell"></div>';
+      for(var x = 0; x <= this.size_x; x++) {
+        if(x == 0 || x == this.size_x) HTML_tooltip = '<span class="n-tooltip">' + (y + 1) + '</span>';
+        if(y == 0 || y == this.size_y) HTML_tooltip += '<span class="s-tooltip">' + String.fromCharCode(65 + x) + '</span>';
+        HTML_field += '<div class="cell" data-x="' + x + '" data-y="' + y + '">'  + HTML_tooltip + '</div>';
+        HTML_tooltip = '';
+        HTML_figures += '<div class="' + this.field[y][x].value.type + ' ' + this.field[y][x].value.side + '" style="' + this.FigurePositioning(x, y) + '"></div>';
       }
       HTML_field += '</div>';
-
     }
-
     this.global_container.className = 'player' + this.current_player;
-    this.global_container.innerHTML = '<p>' + this.players[0].name + '</p><p>' + this.players[1].name + '</p><div id="field">' + HTML_field + '</div><div id="figures">' + HTML_figures + '</div>';
-
+    this.global_container.innerHTML = '<p>' + this.players[0].name + '</p><p>' + this.players[1].name + '</p><div id="figures">' + HTML_figures + '</div><div id="field">' + HTML_field + '</div>';
+    this.Debug('Setting click event');
+    var cells = document.getElementsByClassName('cell');
+    for (var i = 0; i < cells.length; i++) {
+      cells[i].onclick = this.ClickEvent;
+    }
   }
 
   // Rebuilt field
   this.RenewField = function(){
     this.Debug('Rebuilding field');
-    for (var y = 0; y < this.size_y; y++) {
-      for (var x = 0; x < this.size_x; x++) {
+    for (var y = 0; y <= this.size_y; y++) {
+      for (var x = 0; x <= this.size_x; x++) {
         // lol
       }
+    }
+  }
+
+  this.FigurePositioning = function(x, y){
+    return 'top:' + (y * 8) + 'vmin; left:' + (x * 8) + 'vmin;';
+  }
+
+  this.ClickEvent = function(){
+    Checkers.Debug('Click on x:' + this.attributes[1].value + ' y:' + this.attributes[2].value);
+    if(!Checkers.current_select){
+      // Вход в режим выбора действий, выход при нажатии туда-же.
+      // Далее расчет всех возможных ходов.
+    } else {
+      // Выполнение хода.
     }
   }
 
@@ -110,4 +131,4 @@ function Action(id, name){
   this.kill = Array();
 }
 
-var Container = new Checkers('container');
+var Checkers = new Checkers('container');
