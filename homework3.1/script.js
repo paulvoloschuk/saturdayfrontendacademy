@@ -14,6 +14,7 @@ function Checkers(global_container){
   this.players = Array();
   this.field = Array();
   this.cells = Array();
+  this.figures = Array();
   this.current_figures = Array();
   this.current_actions = Array();
   this.current_select = false;
@@ -64,17 +65,18 @@ function Checkers(global_container){
   this.GenerateField = function(){
     this.Debug('Generating field & figures');
     var HTML_field = '', HTML_figures = '', HTML_tooltip = '';
-    for(var id = 0, y = 0; y <= this.size_y; y++) {
+    for(var id_cell = 0, id_figure = 0, y = 0; y <= this.size_y; y++) {
       HTML_field += '<div data-id="' + y + '" class="row">';
       for(var x = 0; x <= this.size_x; x++) {
         if(x == 0 || x == this.size_x) HTML_tooltip = '<span class="n-tooltip">' + (y + 1) + '</span>';
         if(y == 0 || y == this.size_y) HTML_tooltip += '<span class="s-tooltip">' + String.fromCharCode(65 + x) + '</span>';
-        HTML_field += '<div class="cell" id="cell_' + (id++) + '" data-x="' + x + '" data-y="' + y + '">'  + HTML_tooltip + '</div>';
+        HTML_field += '<div class="cell" id="cell_' + (id_cell++) + '" data-x="' + x + '" data-y="' + y + '">'  + HTML_tooltip + '</div>';
         HTML_tooltip = '';
-        HTML_figures += '<div class="' + this.field[y][x].value.type + ' ' + this.field[y][x].value.side + '" style="' + this.FigurePositioning(x, y) + '"></div>';
+        if(this.field[y][x].value) HTML_figures += '<div id="fig_' + (id_figure++) + '" class="figure ' + this.field[y][x].value.type + ' ' + this.field[y][x].value.side + '" style="' + this.FigurePositioning(x, y) + '"></div>';
       }
       HTML_field += '</div>';
       this.cells = document.getElementsByClassName('cell');
+      this.figures = document.getElementsByClassName('figure');
     }
     this.global_container.className = 'player' + this.current_player;
     this.global_container.innerHTML = '<p>' + this.players[0].name + '</p><p>' + this.players[1].name + '</p><div id="figures">' + HTML_figures + '</div><div id="field">' + HTML_field + '</div>';
@@ -93,6 +95,8 @@ function Checkers(global_container){
         // Action firstly
         if(this.field[y][x].action) this.cells[this.field[y][x].id].className = 'cell ' + this.field[y][x].action.name;
         else this.cells[this.field[y][x].id].className = 'cell';
+        // Figures secondary
+        if(this.field[y][x].value) this.figures[this.field[y][x].value.id].style.cssText = this.FigurePositioning(x, y);
       }
     }
     // console.log(this.field);
@@ -101,7 +105,28 @@ function Checkers(global_container){
   this.FigurePositioning = function(x, y){
     return 'top:' + (y * 8) + 'vmin; left:' + (x * 8) + 'vmin;';
   }
-  this.PossibleActions = function(x, y){
+  this.PossibleActions = function(x, y, id = 0){
+    var recursive = false;
+    x = +x;
+    y = +y;
+    var ways = Array(
+      [y-1, x-1],
+      [y-1, x+1],
+      [y+1, x-1],
+      [y+1, x+1]
+    );
+    //console.log(ways);
+    for (var i = 0; i < ways.length; i++) {
+      if(0 <= ways[i][0] && ways[i][0] <= this.size_y && 0 <= ways[i][1] && ways[i][1] <= this.size_x){
+        if(this.field[ways[i][0]][ways[i][1]].value.side !== this.current_side){
+          if(this.field[ways[i][0]][ways[i][1]].value == false) {
+            this.field[ways[i][0]][ways[i][1]].action = new Action(++id, 'move', [ways[i][1], ways[i][0]]);
+            this.current_actions.push(this.field[ways[i][0]][ways[i][1]].action);
+          }
+          //   Или мы проверяем на возможность атаковать (experimental)
+        }
+      }
+    }
 
   }
 
@@ -116,29 +141,40 @@ function Checkers(global_container){
     }
   }
 
+  this.MakemoveAction = function(id){
+    var to_x = this.current_actions[id].cordinates[0][0];
+    var to_y = this.current_actions[id].cordinates[0][1];
+    var from_x = this.current_actions[0].cordinates[0][0];
+    var from_y = this.current_actions[0].cordinates[0][1];
+    this.Debug('Moving to x:' + to_x + ' y:' + to_y);
+    this.field[to_y][to_x].value = this.field[from_y][from_x].value;
+    this.field[from_y][from_x].value = false;
+
+    this.ClearActions();
+  }
+
   this.ClickEvent = function(target){
     var recursive = false;
-    var cell_x = target.attributes[2].value
-    var cell_y = target.attributes[3].value;
+    var cell_x = +target.attributes[2].value
+    var cell_y = +target.attributes[3].value;
     this.Debug('Click on x:' + cell_x + ' y:' + cell_y);
     if(!this.current_select){
-      // Вход в режим выбора действий, выход при нажатии туда-же.
+      // Вход в режим выбора действий
       // Далее расчет всех возможных ходов.
-      console.log(this.field[cell_y][cell_x].value.side);
       if(this.field[cell_y][cell_x].value.side == this.current_side){
         this.current_select = true;
-        this.field[cell_y][cell_x].action = new Action(0, 'select');
+        this.field[cell_y][cell_x].action = new Action(0, 'select', [cell_x, cell_y]);
         this.current_actions.push(this.field[cell_y][cell_x].action);
         this.PossibleActions(cell_x, cell_y);
       }
     } else {
       // Выполнение хода
       if(this.field[cell_y][cell_x].action){
-        alert(1); //--------------------------------------ЗАКОНЧИТЬ
+        eval('this.Make' + this.field[cell_y][cell_x].action.name + 'Action(this.field[cell_y][cell_x].action.id)');
       }else this.ClearActions();
-      if(this.field[cell_y][cell_x].value) recursive = this.ClickEvent(target);
+      if(this.field[cell_y][cell_x].value) console.log('RECURSIVE ERROR'); //recursive = this.ClickEvent(target);
     }
-    if(!recursive)this.UpdateField();
+    if(!recursive) this.UpdateField();
     return true;
   }
 
@@ -160,11 +196,14 @@ function Cell(id, value = false){
   this.value = value;
   this.action = false;
 }
-function Action(id, name){
+function Action(id, name, cordinates){
   this.id = id;
   this.name = name; // move,atack,select
   this.cordinates = Array();
   this.kill = Array();
+
+  this.cordinates.push(cordinates);
+  console.log('x:'+this.cordinates[0][0], 'y:'+this.cordinates[0][1]);
 }
 
 var Checkers = new Checkers('container');
