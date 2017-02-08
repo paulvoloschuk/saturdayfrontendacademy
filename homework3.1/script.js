@@ -36,6 +36,13 @@ function Checkers(global_container){
     if(this.debug) console.log(message);
   }
 
+  this.PlayerSwitch = function(){
+    this.Debug('Switching players');
+    this.current_player = (this.current_player !== 1) ? 1 : 0;
+    this.current_side = (this.current_side !== 'dark') ? 'dark' : 'light';
+    this.global_container.className = 'player' + this.current_player;
+  }
+
   // Generate/Regenerate figures
   this.GenerateStructure = function(){
     this.Debug('Generating matrix');
@@ -86,7 +93,6 @@ function Checkers(global_container){
       cells[i].onclick = function(e) {Checkers.ClickEvent(e.target);}
     }
   }
-
   // Rebuilt field
   this.UpdateField = function(){
     this.Debug('Updating field');
@@ -99,7 +105,6 @@ function Checkers(global_container){
         if(this.field[y][x].value) this.figures[this.field[y][x].value.id].style.cssText = this.FigurePositioning(x, y);
       }
     }
-    // console.log(this.field);
   }
 
   this.FigurePositioning = function(x, y){
@@ -109,25 +114,43 @@ function Checkers(global_container){
     var recursive = false;
     x = +x;
     y = +y;
-    var ways = Array(
+    var move_ways = Array(
       [y-1, x-1],
       [y-1, x+1],
       [y+1, x-1],
       [y+1, x+1]
     );
-    //console.log(ways);
-    for (var i = 0; i < ways.length; i++) {
-      if(0 <= ways[i][0] && ways[i][0] <= this.size_y && 0 <= ways[i][1] && ways[i][1] <= this.size_x){
-        if(this.field[ways[i][0]][ways[i][1]].value.side !== this.current_side){
-          if(this.field[ways[i][0]][ways[i][1]].value == false) {
-            this.field[ways[i][0]][ways[i][1]].action = new Action(++id, 'move', [ways[i][1], ways[i][0]]);
-            this.current_actions.push(this.field[ways[i][0]][ways[i][1]].action);
+    var atack_ways = Array(
+      [y-2, x-2],
+      [y-2, x+2],
+      [y+2, x-2],
+      [y+2, x+2]
+    );
+    //console.log(move_ways);
+    for (var i = 0; i < 4; i++) {
+      // Try to move
+      if(0 <= move_ways[i][0] && move_ways[i][0] <= this.size_y && 0 <= move_ways[i][1] && move_ways[i][1] <= this.size_x){
+        if(this.field[move_ways[i][0]][move_ways[i][1]].value.side !== this.current_side){
+          if(this.field[move_ways[i][0]][move_ways[i][1]].value == false) {
+            this.field[move_ways[i][0]][move_ways[i][1]].action = new Action(++id, 'move', [move_ways[i][1], move_ways[i][0]]);
+            this.current_actions.push(this.field[move_ways[i][0]][move_ways[i][1]].action);
           }
-          //   Или мы проверяем на возможность атаковать (experimental)
         }
       }
+      // Try to atack ---------------------------------------------------------------------------------------------------------------------------------------------- TROUBLE SOMEWHERE HERE
+      // if(0 <= atack_ways[i][0] && atack_ways[i][0] <= this.size_y && 0 <= atack_ways[i][1] && atack_ways[i][1] <= this.size_x){
+      //   if(this.field[atack_ways[i][0]][atack_ways[i][1]].value == false) {
+      //     this.field[atack_ways[i][0]][atack_ways[i][1]].action = new Action(++id, 'atack', [atack_ways[i][1], atack_ways[i][0]], 'kill_id');
+      //     this.current_actions.push(this.field[atack_ways[i][0]][atack_ways[i][1]].action);
+      //   }
+      // }
     }
 
+  }
+
+  this.FinalizeAction = function(){
+    this.ClearActions();
+    this.UpdateField();
   }
 
   this.ClearActions = function(){
@@ -149,12 +172,13 @@ function Checkers(global_container){
     this.Debug('Moving to x:' + to_x + ' y:' + to_y);
     this.field[to_y][to_x].value = this.field[from_y][from_x].value;
     this.field[from_y][from_x].value = false;
-
-    this.ClearActions();
+    this.FinalizeAction();
+    this.PlayerSwitch();
   }
 
   this.ClickEvent = function(target){
     var recursive = false;
+    var update = true;
     var cell_x = +target.attributes[2].value
     var cell_y = +target.attributes[3].value;
     this.Debug('Click on x:' + cell_x + ' y:' + cell_y);
@@ -166,15 +190,16 @@ function Checkers(global_container){
         this.field[cell_y][cell_x].action = new Action(0, 'select', [cell_x, cell_y]);
         this.current_actions.push(this.field[cell_y][cell_x].action);
         this.PossibleActions(cell_x, cell_y);
-      }
+      } else update = false;
     } else {
       // Выполнение хода
       if(this.field[cell_y][cell_x].action){
         eval('this.Make' + this.field[cell_y][cell_x].action.name + 'Action(this.field[cell_y][cell_x].action.id)');
+        return false;
       }else this.ClearActions();
-      if(this.field[cell_y][cell_x].value) console.log('RECURSIVE ERROR'); //recursive = this.ClickEvent(target);
+      if(this.field[cell_y][cell_x].value) recursive = this.ClickEvent(target);
     }
-    if(!recursive) this.UpdateField();
+    if(!recursive && update) this.UpdateField();
     return true;
   }
 
@@ -196,11 +221,11 @@ function Cell(id, value = false){
   this.value = value;
   this.action = false;
 }
-function Action(id, name, cordinates){
+function Action(id, name, cordinates, kill = false){
   this.id = id;
   this.name = name; // move,atack,select
   this.cordinates = Array();
-  this.kill = Array();
+  this.kill = kill;
 
   this.cordinates.push(cordinates);
   console.log('x:'+this.cordinates[0][0], 'y:'+this.cordinates[0][1]);

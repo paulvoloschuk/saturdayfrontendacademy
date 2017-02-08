@@ -56,6 +56,10 @@ body{
   background: rgba(27, 236, 236, 0.32);
   border: 0.2em solid rgba(27, 236, 236, 0.8)
 }
+.cell.atack::after{
+  background: rgba(236, 58, 27, 0.32);
+  border: 0.2em solid rgba(236, 58, 27, 0.8)
+}
 .row:nth-of-type(even) .cell:nth-child(odd),
 .row:nth-of-type(odd) .cell:nth-child(even){
   background: url(img/wood-dark.jpg);
