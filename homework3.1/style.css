@@ -38,7 +38,7 @@ body{
   height: 8vmin;
   position:relative;
 }
-.cell.focus::after,
+.cell.select::after,
 .cell.move::after,
 .cell.atack::after{
   content: "";
