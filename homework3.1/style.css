@@ -90,7 +90,10 @@ body{
 .row .cell:first-child .n-tooltip{right:100%;}
 .row .cell:last-child .n-tooltip{left:100%;}
 #figures{
-  position: relative;
+  position: absolute;
+  width:calc(100% - 6em);
+  height:calc(100% - 6em);
+
 }
 #figures .regular,
 #figures .queen{
@@ -144,3 +147,6 @@ background: url(img/wood-dark.jpg);
 #figures .light.queen::after{
   background: rgba(51, 42, 42, 0.4);
 }
+#figures .fallen{pointer-events:initial;}
+#figures .light.fallen{left: 100% !important;top: calc(-4vmin - 3em ) !important;}
+#figures .dark.fallen{left: 0 !important;top: calc(100% - 4vmin + 3em) !important;}

@@ -2,7 +2,7 @@
 var MYAPP = MYAPP || {};
 
 function Checkers(global_container){
-  this.debug = true;
+  this.debug = false;
   this.global_container = document.getElementById(global_container);
   this.field_container;
   this.figures_container;
@@ -20,6 +20,7 @@ function Checkers(global_container){
   this.current_select = false;
   this.current_player = 0;
   this.current_side = 'light';
+  this.kill_count = Array([], []);
 
   // Constructor
   this.Construct = function(){
@@ -129,23 +130,15 @@ function Checkers(global_container){
     //console.log(move_ways);
     for (var i = 0; i < 4; i++) {
       // Try to move
-      if(0 <= move_ways[i][0] && move_ways[i][0] <= this.size_y && 0 <= move_ways[i][1] && move_ways[i][1] <= this.size_x){
-        if(this.field[move_ways[i][0]][move_ways[i][1]].value.side !== this.current_side){
-          if(this.field[move_ways[i][0]][move_ways[i][1]].value == false) {
-            this.field[move_ways[i][0]][move_ways[i][1]].action = new Action(++id, 'move', [move_ways[i][1], move_ways[i][0]]);
-            this.current_actions.push(this.field[move_ways[i][0]][move_ways[i][1]].action);
-          }
-        }
+      if(0 <= move_ways[i][0] && move_ways[i][0] <= this.size_y && 0 <= move_ways[i][1] && move_ways[i][1] <= this.size_x && this.field[move_ways[i][0]][move_ways[i][1]].value.side !== this.current_side && this.field[move_ways[i][0]][move_ways[i][1]].value == false){
+          this.field[move_ways[i][0]][move_ways[i][1]].action = new Action(++id, 'move', [move_ways[i][1], move_ways[i][0]]);
+          this.current_actions.push(this.field[move_ways[i][0]][move_ways[i][1]].action);
+        // Try to atack ---------------------------------------------------------------------------------------------------------------------------------------------- TROUBLE SOMEWHERE HERE
+      }else if(0 <= atack_ways[i][0] && atack_ways[i][0] <= this.size_y && 0 <= atack_ways[i][1] && atack_ways[i][1] <= this.size_x && this.field[atack_ways[i][0]][atack_ways[i][1]].value == false && this.field[move_ways[i][0]][move_ways[i][1]].value.side !== this.current_side){
+          this.field[atack_ways[i][0]][atack_ways[i][1]].action = new Action(++id, 'atack', [atack_ways[i][1], atack_ways[i][0]], [move_ways[i][1], move_ways[i][0]]);
+          this.current_actions.push(this.field[atack_ways[i][0]][atack_ways[i][1]].action);
       }
-      // Try to atack ---------------------------------------------------------------------------------------------------------------------------------------------- TROUBLE SOMEWHERE HERE
-      // if(0 <= atack_ways[i][0] && atack_ways[i][0] <= this.size_y && 0 <= atack_ways[i][1] && atack_ways[i][1] <= this.size_x){
-      //   if(this.field[atack_ways[i][0]][atack_ways[i][1]].value == false) {
-      //     this.field[atack_ways[i][0]][atack_ways[i][1]].action = new Action(++id, 'atack', [atack_ways[i][1], atack_ways[i][0]], 'kill_id');
-      //     this.current_actions.push(this.field[atack_ways[i][0]][atack_ways[i][1]].action);
-      //   }
-      // }
     }
-
   }
 
   this.FinalizeAction = function(){
@@ -165,15 +158,24 @@ function Checkers(global_container){
   }
 
   this.MakemoveAction = function(id){
-    var to_x = this.current_actions[id].cordinates[0][0];
-    var to_y = this.current_actions[id].cordinates[0][1];
-    var from_x = this.current_actions[0].cordinates[0][0];
-    var from_y = this.current_actions[0].cordinates[0][1];
+    var to_x = this.current_actions[id].cordinates[0];
+    var to_y = this.current_actions[id].cordinates[1];
+    var from_x = this.current_actions[0].cordinates[0];
+    var from_y = this.current_actions[0].cordinates[1];
     this.Debug('Moving to x:' + to_x + ' y:' + to_y);
     this.field[to_y][to_x].value = this.field[from_y][from_x].value;
     this.field[from_y][from_x].value = false;
     this.FinalizeAction();
     this.PlayerSwitch();
+  }
+
+  this.MakeatackAction = function(id){
+    var margin = (!!this.current_player) ? '-' : '';
+    this.field[this.current_actions[id].kill[1]][this.current_actions[id].kill[0]].alive = false;
+    this.figures[this.field[this.current_actions[id].kill[1]][this.current_actions[id].kill[0]].value.id].className += ' fallen';
+    this.figures[this.field[this.current_actions[id].kill[1]][this.current_actions[id].kill[0]].value.id].style.cssText += ' margin-left:' + margin + (++this.kill_count[this.current_player]*3) + 'vmin; z-index:' + this.kill_count[this.current_player] + ';';
+    this.field[this.current_actions[id].kill[1]][this.current_actions[id].kill[0]].value = false;
+    this.MakemoveAction(id);
   }
 
   this.ClickEvent = function(target){
@@ -224,11 +226,10 @@ function Cell(id, value = false){
 function Action(id, name, cordinates, kill = false){
   this.id = id;
   this.name = name; // move,atack,select
-  this.cordinates = Array();
+  this.cordinates = cordinates;
   this.kill = kill;
-
-  this.cordinates.push(cordinates);
-  console.log('x:'+this.cordinates[0][0], 'y:'+this.cordinates[0][1]);
+  console.log(kill);
+  //  console.log('x:'+this.cordinates[0][0], 'y:'+this.cordinates[0][1]);
 }
 
 var Checkers = new Checkers('container');
