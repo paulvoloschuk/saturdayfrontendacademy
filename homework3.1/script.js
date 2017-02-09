@@ -2,7 +2,7 @@
 var MYAPP = MYAPP || {};
 
 function Checkers(global_container){
-  this.debug = false;
+  this.debug = true;
   this.global_container = document.getElementById(global_container);
   this.field_container;
   this.figures_container;
@@ -112,6 +112,7 @@ function Checkers(global_container){
     return 'top:' + (y * 8) + 'vmin; left:' + (x * 8) + 'vmin;';
   }
   this.PossibleActions = function(x, y, id = 0){
+    var clear_actions_name = false;
     var recursive = false;
     x = +x;
     y = +y;
@@ -127,7 +128,6 @@ function Checkers(global_container){
       [y+2, x-2],
       [y+2, x+2]
     );
-    //console.log(move_ways);
     for (var i = 0; i < 4; i++) {
       // Try to move
       if(0 <= move_ways[i][0] && move_ways[i][0] <= this.size_y && 0 <= move_ways[i][1] && move_ways[i][1] <= this.size_x && this.field[move_ways[i][0]][move_ways[i][1]].value.side !== this.current_side && this.field[move_ways[i][0]][move_ways[i][1]].value == false){
@@ -137,8 +137,10 @@ function Checkers(global_container){
       }else if(0 <= atack_ways[i][0] && atack_ways[i][0] <= this.size_y && 0 <= atack_ways[i][1] && atack_ways[i][1] <= this.size_x && this.field[atack_ways[i][0]][atack_ways[i][1]].value == false && this.field[move_ways[i][0]][move_ways[i][1]].value.side !== this.current_side){
           this.field[atack_ways[i][0]][atack_ways[i][1]].action = new Action(++id, 'atack', [atack_ways[i][1], atack_ways[i][0]], [move_ways[i][1], move_ways[i][0]]);
           this.current_actions.push(this.field[atack_ways[i][0]][atack_ways[i][1]].action);
+          clear_actions_name = 'move';
       }
     }
+    if(clear_actions_name) this.ClearActions(clear_actions_name);
   }
 
   this.FinalizeAction = function(){
@@ -146,13 +148,19 @@ function Checkers(global_container){
     this.UpdateField();
   }
 
-  this.ClearActions = function(){
-    this.Debug('Abbadon all actions');
-    this.current_actions = Array();
-    this.current_select = false;
+  this.ClearActions = function(name = 'all'){
+    this.Debug('Abbadon ' + name + ' actions');
+    if(name == 'all'){
+      this.current_actions = Array();
+      this.current_select = false;
+    }else{
+      for (var i = 0; i < this.current_actions.length; i++)
+        if(this.current_actions[i].name == name) this.current_actions.splice(i, 1);
+    }
     for (var y = 0; y <= this.size_y; y++) {
       for (var x = 0; x <= this.size_x; x++) {
-        this.field[y][x].action = false;
+        if(name == 'all') this.field[y][x].action = false;
+        else if(this.field[y][x].action.name == name) this.field[y][x].action = false;
       }
     }
   }
@@ -228,8 +236,6 @@ function Action(id, name, cordinates, kill = false){
   this.name = name; // move,atack,select
   this.cordinates = cordinates;
   this.kill = kill;
-  console.log(kill);
-  //  console.log('x:'+this.cordinates[0][0], 'y:'+this.cordinates[0][1]);
 }
 
 var Checkers = new Checkers('container');
