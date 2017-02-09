@@ -21,6 +21,7 @@ function Checkers(global_container){
   this.current_player = 0;
   this.current_side = 'light';
   this.kill_count = Array([], []);
+  this.points = Array();
 
   // Constructor
   this.Construct = function(){
@@ -33,12 +34,19 @@ function Checkers(global_container){
     this.GenerateField();
   }
 
-  this.Debug = function(message){
-    if(this.debug) console.log(message);
+  this.Debug = function(type, message){
+    if(this.debug){
+      if(this.debug === true) {
+        this.debug = 0;
+        console.group("Log");
+      }
+      eval('console.' + type + '(++this.debug + ": "+ message);');
+      //console.groupEnd();
+    }
   }
 
   this.PlayerSwitch = function(){
-    this.Debug('Switching players');
+    this.Debug('info', 'Switching players');
     this.current_player = (this.current_player !== 1) ? 1 : 0;
     this.current_side = (this.current_side !== 'dark') ? 'dark' : 'light';
     this.global_container.className = 'player' + this.current_player;
@@ -46,7 +54,7 @@ function Checkers(global_container){
 
   // Generate/Regenerate figures
   this.GenerateStructure = function(){
-    this.Debug('Generating matrix');
+    this.Debug('log', 'Generating matrix');
     this.field = Array();
     var pass_cell = true;
     for(var id_cell = 0, id_figure = 0, side = false, y = 0; y <= this.size_y; y++) {
@@ -71,7 +79,7 @@ function Checkers(global_container){
 
   // Generate HTML field & start events
   this.GenerateField = function(){
-    this.Debug('Generating field & figures');
+    this.Debug('log', 'Generating field & figures');
     var HTML_field = '', HTML_figures = '', HTML_tooltip = '';
     for(var id_cell = 0, id_figure = 0, y = 0; y <= this.size_y; y++) {
       HTML_field += '<div data-id="' + y + '" class="row">';
@@ -88,15 +96,14 @@ function Checkers(global_container){
     }
     this.global_container.className = 'player' + this.current_player;
     this.global_container.innerHTML = '<p>' + this.players[0].name + '</p><p>' + this.players[1].name + '</p><div id="figures">' + HTML_figures + '</div><div id="field">' + HTML_field + '</div>';
-    this.Debug('Setting click events');
-    var cells = document.getElementsByClassName('cell');
-    for (var i = 0; i < cells.length; i++) {
-      cells[i].onclick = function(e) {Checkers.ClickEvent(e.target);}
+    this.Debug('log', 'Setting click events');
+    for (var i = 0; i < this.cells.length; i++) {
+      this.cells[i].onclick = function(e) {Checkers.ClickEvent(e.target);}
     }
   }
   // Rebuilt field
   this.UpdateField = function(){
-    this.Debug('Updating field');
+    this.Debug('log', 'Updating field');
     for (var y = 0; y <= this.size_y; y++) {
       for (var x = 0; x <= this.size_x; x++) {
         // Action firstly
@@ -112,6 +119,7 @@ function Checkers(global_container){
     return 'top:' + (y * 8) + 'vmin; left:' + (x * 8) + 'vmin;';
   }
   this.PossibleActions = function(x, y, id = 0){
+    this.Debug('log', 'Calculating posible actions');
     var clear_actions_name = false;
     var recursive = false;
     x = +x;
@@ -143,19 +151,11 @@ function Checkers(global_container){
     if(clear_actions_name) this.ClearActions(clear_actions_name);
   }
 
-  this.FinalizeAction = function(){
-    this.ClearActions();
-    this.UpdateField();
-  }
-
   this.ClearActions = function(name = 'all'){
-    this.Debug('Abbadon ' + name + ' actions');
+    this.Debug('info', 'Abbadon ' + name + ' actions');
     if(name == 'all'){
       this.current_actions = Array();
       this.current_select = false;
-    }else{
-      for (var i = 0; i < this.current_actions.length; i++)
-        if(this.current_actions[i].name == name) this.current_actions.splice(i, 1);
     }
     for (var y = 0; y <= this.size_y; y++) {
       for (var x = 0; x <= this.size_x; x++) {
@@ -165,25 +165,46 @@ function Checkers(global_container){
     }
   }
 
-  this.MakemoveAction = function(id){
+  this.MakeQueen = function(){
+
+  }
+
+  this.MakemoveAction = function(id, rerun = false){
     var to_x = this.current_actions[id].cordinates[0];
     var to_y = this.current_actions[id].cordinates[1];
     var from_x = this.current_actions[0].cordinates[0];
     var from_y = this.current_actions[0].cordinates[1];
-    this.Debug('Moving to x:' + to_x + ' y:' + to_y);
+    this.Debug('warn', 'Moving to x:' + to_x + ' y:' + to_y);
     this.field[to_y][to_x].value = this.field[from_y][from_x].value;
     this.field[from_y][from_x].value = false;
-    this.FinalizeAction();
-    this.PlayerSwitch();
+    this.ClearActions();
+    this.UpdateField();
+    if(!rerun) this.PlayerSwitch();
+    else {
+      alert(1);
+      // Seeking all actions
+      this.PossibleActions(to_x, to_y);
+      // trying to find 'atack' action
+      for (var i = 0; i < this.current_actions.length; i++) {
+        if(this.current_actions[i].name == 'atack'){
+          this.ClearActions();
+          this.ClickEvent(document.getElementById(this.field[to_y][to_x].id));
+        } else {
+          this.ClearActions();
+          this.PlayerSwitch();
+        }
+      }
+    }
   }
 
   this.MakeatackAction = function(id){
     var margin = (!!this.current_player) ? '-' : '';
+    this.Debug('warn', 'Atacking x:' + this.current_actions[id].kill[0] + ' y:' + this.current_actions[id].kill[1]);
     this.field[this.current_actions[id].kill[1]][this.current_actions[id].kill[0]].alive = false;
     this.figures[this.field[this.current_actions[id].kill[1]][this.current_actions[id].kill[0]].value.id].className += ' fallen';
     this.figures[this.field[this.current_actions[id].kill[1]][this.current_actions[id].kill[0]].value.id].style.cssText += ' margin-left:' + margin + (++this.kill_count[this.current_player]*3) + 'vmin; z-index:' + this.kill_count[this.current_player] + ';';
     this.field[this.current_actions[id].kill[1]][this.current_actions[id].kill[0]].value = false;
-    this.MakemoveAction(id);
+    this.MakemoveAction(id, true);
   }
 
   this.ClickEvent = function(target){
@@ -191,10 +212,10 @@ function Checkers(global_container){
     var update = true;
     var cell_x = +target.attributes[2].value
     var cell_y = +target.attributes[3].value;
-    this.Debug('Click on x:' + cell_x + ' y:' + cell_y);
+    this.Debug('log', 'Click on x:' + cell_x + ' y:' + cell_y);
     if(!this.current_select){
       // Вход в режим выбора действий
-      // Далее расчет всех возможных ходов.
+      // Далее расчет всcех возможных ходов.
       if(this.field[cell_y][cell_x].value.side == this.current_side){
         this.current_select = true;
         this.field[cell_y][cell_x].action = new Action(0, 'select', [cell_x, cell_y]);
@@ -202,6 +223,7 @@ function Checkers(global_container){
         this.PossibleActions(cell_x, cell_y);
       } else update = false;
     } else {
+      console.log(this.current_actions);
       // Выполнение хода
       if(this.field[cell_y][cell_x].action){
         eval('this.Make' + this.field[cell_y][cell_x].action.name + 'Action(this.field[cell_y][cell_x].action.id)');
