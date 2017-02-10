@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Homework 3.2</title>
+    <link rel="stylesheet" href="../common/css/normalize.css" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- Hightlighter -->
+    <link rel="stylesheet" href="../common/highlight/styles/atom-one-dark.css">
+    <script src="../common/highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+  </head>
+  <body>
+    <header>
+      <div class="wrapper">
+        <div class="logo"></div>
+        <h1>Paul Voloschuk<span>Homework 3.2</span></h1>
+        <a href="#">Return to</a>
+      </div>
+    </header>
+    <section>
+      <div class="wrapper">
+        <article>
+          <h2>Exercise 1</h2>
+          <p>My own <span class="code">.reverse()</span> function based on <span class="code">for()</span> and math operations. Try to change values.</p>
+          <form id="reverse_function" class="panel">
+            <input type="text" class="cell" placeholder="0" value="Lorem">
+            <input type="text" class="cell" placeholder="1" value="ipsum">
+            <input type="text" class="cell" placeholder="2" value="dolor">
+            <input type="text" class="cell" placeholder="3" value="sit">
+            <input type="text" class="cell" placeholder="4" value="amet">
+            <input type="text" class="cell" placeholder="5" value="consectetur">
+            <input type="text" class="cell" placeholder="6" value="adipisicing">
+            <input type="text" class="cell" placeholder="7" value="elit">
+            <input type="text" class="cell" placeholder="8" value="sed">
+            <input type="text" class="cell" placeholder="9" value="do">
+          </form>
+          <h3>Result</h3>
+          <p id="ex1_result"></p>
+          <h3>Code</h3>
+          <pre><code class="javascript">function Reverse(array){
+  for(var i = 0; i < (array.length / 2); i++){
+    array[i] = [array[i], array[array.length - i - 1]];
+    array[array.length - i - 1] = array[i][0];
+    array[i] = array[i][1];
+  }
+  return array;
+}</code></pre>
+        </article>
+        <hr />
+        <article>
+          <h2>Exercise2</h2>
+          <p>My realization of <span class="code">.sort()</span> function for numbers. To initiate array we use random values. Lets take a look.<br />Try with negative numbers =)</p>
+          <form class="panel" id="sort_function">
+            <input type="submit" value="Generate array">
+            <input type="text" value="21" style="width:3em;text-align:center;" name="size" >
+            <p id="ex2_result1" class="result"></p>
+          </form>
+          <h3>Result</h3>
+          <p id="ex2_result2"  class="result"></p>
+          <h3>Code</h3>
+          <pre><code class="javascript">function SortByNumber(array, order_by_desc){
+              for (var i = 0; i < array.length; i++) {
+                for (var ii = 0; ii < array.length; ii++) {
+                  if(array[i] > array[ii]){
+                    array[i] = [array[ii], array[ii] = array[i]][0];
+                  }
+                }
+              }
+              return ((order_by_desc) ? array.reverse() : array);
+            }</code></pre>
+        </article>
+        <hr />
+        <article>
+
+        </article>
+        <article>
+
+        </article>
+        <article>
+
+        </article>
+      </div>
+    </section>
+    <script src="script.js"></script>
+  </body>
+</html>
