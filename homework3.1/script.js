@@ -181,7 +181,6 @@ function Checkers(global_container){
     this.UpdateField();
     if(!rerun) this.PlayerSwitch();
     else {
-      alert(1);
       // Seeking all actions
       this.PossibleActions(to_x, to_y);
       // trying to find 'atack' action
