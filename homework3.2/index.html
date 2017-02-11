@@ -19,9 +19,10 @@
         <div class="logo"></div>
         <h1>Paul Voloschuk<span>Homework 3.2</span></h1>
         <a href="https://github.com/paulvoloschuk/saturdayfrontendacademy">Return to</a>
-        <a href="#exercise3">Ex3</a>
-        <a href="#exercise2">Ex2</a>
-        <a href="#exercise1">Ex1</a>
+        <a href="#exercise4">Factorial</a>
+        <a href="#exercise3">Matrix</a>
+        <a href="#exercise2">Sort</a>
+        <a href="#exercise1">Reverse</a>
       </div>
     </header>
     <section>
@@ -99,7 +100,7 @@
 
           </div>
           <h3>Main functions</h3>
-          <pre><code class="javascript">  this.DrawSquare = function(start_index, size, color, fill = 'transparent'){
+          <pre><code class="javascript">this.DrawSquare = function(start_index, size, color, fill = 'transparent'){
   for (var y = start_index[0]; y < (start_index[0] + size); y++) {
     for (var x = start_index[1]; x < (start_index[1] + size); x++) {
       if(y >= 0 && y < this.size && x >= 0 && x < this.size){
@@ -151,6 +152,17 @@ this.DrawWave = function(){
         <article>
           <h2 id="exercise4">Exercise4</h2>
           <p>Counting factorial from number.</p>
+          <form id="factorial_function" class="panel">
+            <input style="text-align:right;width:5em;" type="text" pattern="^[0-9]$" value="5" >
+            <span> ! = aasdasd</span>
+          </form>
+          <h3>Code</h3>
+<pre><code class="javascript">function Factorial(num){
+  if(num == 0) return 1;
+  var result = 1;
+  for (var i = 1; i <= num; i++) result *= i;
+  return result;
+}</code></pre>
         </article>
       </div>
     </section>

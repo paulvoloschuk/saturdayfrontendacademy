@@ -23,6 +23,13 @@ function SortByNumber(array, order_by_desc){
   return ((order_by_desc) ? array.reverse() : array);
 }
 
+function Factorial(num){
+  if(num == 0) return 1;
+  var result = 1;
+  for (var i = 1; i <= num; i++) result *= i;
+  return result;
+}
+
 // User function
 function Exercise1(){
   var result_container = document.getElementById('ex1_result');
@@ -169,13 +176,21 @@ function Exercise3(){
   this.GenerateField();
 }
 
+function Exercise4(){
+  var value = document.getElementById('factorial_function')[0].value;
+  document.querySelector('#factorial_function span').innerHTML = '! = ' + Factorial(value);
+}
+
 // Initialize exercises
 Exercise1();
 Exercise2();
 var Matrix = new Exercise3();
+Exercise4();
 
 // Events
 document.getElementById('reverse_function').onkeyup = function(e){Exercise1()};
 document.getElementById('sort_function').onsubmit = function(e){Exercise2();return false;};
 document.getElementById('matrix_function').onchange = function(){Matrix.RecountColor();};
 document.getElementById('matrix_function').onsubmit = function(){Matrix.RecountColor();return false;};
+document.getElementById('factorial_function').onkeyup = function(){Exercise4();};
+document.getElementById('factorial_function').onsubmit = function(){Exercise4();return false;};
