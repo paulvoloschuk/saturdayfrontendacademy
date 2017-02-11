@@ -31,7 +31,8 @@ a:hover{
   color: #c678dd;
   border-bottom: 1px dashed #c678dd;
 }
-h1, h2, h3{color: white;}
+h2{color: gold;}
+h1, h3{color: white;}
 .code{
   font-family: monospace;
   padding: 0.2em 0.5em;
@@ -58,8 +59,12 @@ header .wrapper * {
   display: inline-block;
   font-weight: normal;
 }
-header a{float: right;line-height: 2em;}
-header a::after{
+header a{
+  float: right;
+  line-height: 2em;
+  margin-left: 1em !important;
+}
+header a:first-of-type::after{
   content: "\f100";
   font: 1em Flaticon;
   margin: 0 0 0 0.3em;
