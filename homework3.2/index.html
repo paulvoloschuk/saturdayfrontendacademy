@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <title>Homework 3.2</title>
+    <link rel="icon" type="image/x-icon" href="../common/favicon.ico">
+    <link rel="icon" type="image/png" href="../common/favicon.png">
     <link rel="stylesheet" href="../common/css/normalize.css" />
     <link rel="stylesheet" href="style.css" />
     <!-- Hightlighter -->
@@ -16,14 +18,14 @@
       <div class="wrapper">
         <div class="logo"></div>
         <h1>Paul Voloschuk<span>Homework 3.2</span></h1>
-        <a href="#">Return to</a>
+        <a href="https://github.com/paulvoloschuk/saturdayfrontendacademy">Return to</a>
       </div>
     </header>
     <section>
       <div class="wrapper">
         <article>
           <h2>Exercise 1</h2>
-          <p>My own <span class="code">.reverse()</span> function based on <span class="code">for()</span> and math operations. Try to change values.</p>
+          <p>My own <span class="code">.reverse()</span> function based on <span class="code">for()</span> and math operations. Try to change or clear values.</p>
           <form id="reverse_function" class="panel">
             <input type="text" class="cell" placeholder="0" value="Lorem">
             <input type="text" class="cell" placeholder="1" value="ipsum">
@@ -51,32 +53,96 @@
         <hr />
         <article>
           <h2>Exercise2</h2>
-          <p>My realization of <span class="code">.sort()</span> function for numbers. To initiate array we use random values. Lets take a look.<br />Try with negative numbers =)</p>
+          <p>My realization of <span class="code">.sort()</span> function for numbers. To initiate array we use random values. Lets take a look.<br />Try it with negative numbers =)</p>
           <form class="panel" id="sort_function">
             <input type="submit" value="Generate array">
-            <input type="text" value="21" style="width:3em;text-align:center;" name="size" >
+            <input type="text" value="21" pattern="^(-[0-9]+|[0-9]+)$" style="width:3em;text-align:center;" name="size" >
+            {
             <p id="ex2_result1" class="result"></p>
+            }
           </form>
           <h3>Result</h3>
           <p id="ex2_result2"  class="result"></p>
           <h3>Code</h3>
           <pre><code class="javascript">function SortByNumber(array, order_by_desc){
-              for (var i = 0; i < array.length; i++) {
-                for (var ii = 0; ii < array.length; ii++) {
-                  if(array[i] > array[ii]){
-                    array[i] = [array[ii], array[ii] = array[i]][0];
-                  }
-                }
-              }
-              return ((order_by_desc) ? array.reverse() : array);
-            }</code></pre>
+  for (var i = 0; i < array.length; i++) {
+    for (var ii = 0; ii < array.length; ii++) {
+      if(array[i] > array[ii]){
+        array[i] = [array[ii], array[ii] = array[i]][0];
+      }
+    }
+  }
+  return ((order_by_desc) ? array.reverse() : array);
+}</code></pre>
         </article>
         <hr />
         <article>
+          <h2>Exercise3</h2>
+          <p>Building a random(!) complex matrix with double <span class="code">for()</span> cycles and index check.<br />There are several modes generate to. You can change colors by editing <span class="code">input</span></p>
+          <form class="panel" id="matrix_function">
+            <input id="option_1" type="radio" name="font" value="kaleidoscope" >
+            <label for="option_1">Kaleidoscope</label>
+            <input id="option_2" type="radio" name="font" value="square" checked >
+            <label for="option_2">Squares</label>
+            <input id="option_3" type="radio" name="font" value="wave" >
+            <label for="option_3">Waves</label>
+            <input id="color_1" type="text" maxlength="6" class="color" value="c678dd" pattern="^[0-9A-Fa-f]{6}$" name="color1"><label for="color_1">#</label>
+            <input id="color_2" type="text" maxlength="6" class="color" value="5591e2" pattern="^[0-9A-Fa-f]{6}$" name="color2"><label for="color_2">#</label>
+            <input id="color_3" type="text" maxlength="6" class="color" value="3eb071" pattern="^[0-9A-Fa-f]{6}$" name="color3"><label for="color_3">#</label>
+            <input type="submit" value="Generate it">
+          </form>
+          <h3>Result</h3>
+          <div id="ex3_result">
 
-        </article>
-        <article>
+          </div>
+          <h3>Main functions</h3>
+          <pre><code class="javascript">  this.DrawSquare = function(start_index, size, color, fill = 'transparent'){
+  for (var y = start_index[0]; y < (start_index[0] + size); y++) {
+    for (var x = start_index[1]; x < (start_index[1] + size); x++) {
+      if(y >= 0 && y < this.size && x >= 0 && x < this.size){
+        if(y == start_index[0] ||
+           y == start_index[0] + size - 1 ||
+           x == start_index[1] ||
+           x == start_index[1] + size - 1)
+          this.matrix[y][x] = color;
+        else this.matrix[y][x] = fill;
+      }
+    }
+  }
+}
 
+this.DrawCross = function(){
+  var temp_color;
+  for (var y = 0; y < this.size; y++) {
+    for (var x = 0; x < this.size; x++) {
+      if(x < this.size/2 && y < this.size/2){
+        temp_color = this.color[Random(0 ,2)];
+        this.matrix[y][x] =
+        this.matrix[x][y] =
+        this.matrix[y][this.size - x - 1] =
+        this.matrix[this.size - x - 1][y] =
+        this.matrix[x][this.size - y - 1] =
+        this.matrix[this.size - y - 1][x] =
+        this.matrix[this.size - x - 1][this.size - y - 1] =
+        this.matrix[this.size - y - 1][this.size - x - 1] =
+        temp_color;
+      }
+    }
+  }
+}
+
+this.DrawWave = function(){
+  var temp_color;
+  for (var z = 0; z < this.size*2; z++) {
+    temp_color = this.color[Random(0 ,2)];
+    for (var y = 0, x = z; y < this.size, x >= 0; y++, x--) {
+      // for (var x = z; x >= 0; x--) {
+        if(y >= 0 && y < this.size && x >= 0 && x < this.size) this.matrix[y][x] = temp_color;
+      // }
+    }
+
+  }
+}</code></pre>
         </article>
         <article>
 
