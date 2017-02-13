@@ -6,3 +6,4 @@
 3. 28.01.17 [Responsitive+Flexbox](https://paulvoloschuk.github.io/saturdayfrontendacademy/homework2.2/index.html)
 4. 04.02.17 [Checkers & Agony](https://paulvoloschuk.github.io/saturdayfrontendacademy/homework3.1/index.html)
 5. 04.02.17 [ArraySort+ArrayReverse+MatrixGeneration](https://paulvoloschuk.github.io/saturdayfrontendacademy/homework3.2/index.html)
+6. 04.02.17 [localStorageDataBase](https://paulvoloschuk.github.io/saturdayfrontendacademy/homework3.3/index.html)
