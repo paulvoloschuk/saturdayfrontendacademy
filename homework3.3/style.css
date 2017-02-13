@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@font-face {
+  font-family: "Flaticon";
+  src: url("../common/iconfont/Flaticon.eot");
+  src: url("../common/iconfont/Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("../common/iconfont/Flaticon.woff") format("woff"),
+       url("../common/iconfont/Flaticon.ttf") format("truetype"),
+       url("../common/iconfont/Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+*{transition:0.1s ease-in-out;}
+*:focus{outline:none;}
+body,html{width: 100%; height: 100%;}
+body{
+  font-family: 'Ubuntu', sans-serif;
+  background:#21252b;
+  color:#858182;
+  overflow-x: hidden;
+}
+.wrapper{
+  margin: 0 auto;
+  max-width: 1000px;
+  width:90%;
+}
+a{
+  text-decoration: none;
+  color:#5591e2;
+}
+a:hover{
+  color: #c678dd;
+  border-bottom: 1px dashed #c678dd;
+}
+h2{color: gold;}
+h1, h3{color: white;}
+.code{
+  font-family: monospace;
+  padding: 0.2em 0.5em;
+  border-radius: 5%;
+  margin: 0 0.3em;
+  color:#abb4cb;
+  background:#444457;
+}
+.code span{
+  color: orange;
+}
+.code .warn{
+  color: indianred;
+}
+article{padding-bottom: 5em;}
+header{
+  background: rgba(0,0,0,.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.5em 0;
+  box-sizing: content-box;
+}
+header .wrapper * {
+  margin:0;
+  display: inline-block;
+  font-weight: normal;
+}
+header a{
+  float: right;
+  line-height: 2em;
+  margin-left: 1em !important;
+}
+header a:first-of-type::after{
+  content: "\f100";
+  font: 1em Flaticon;
+  margin: 0 0 0 0.3em;
+}
+header h1{
+  position:relative;
+  font-size: 120%;
+  top: -0.7em;
+}
+header h1 span{
+  position:absolute;
+  top: 1.5em;
+  left:0;
+  text-transform: uppercase;
+  font-size: 70%;
+  color:#858182;
+}
+.logo::after{
+  font:2em Flaticon;
+  content: "\f101";
+  display: inline;
+  color:white;
+  padding: 0 0.3em 0 0;
+}
+code{border:1px solid #2d3e5b;}
+hr{
+  border:none;
+  border-top: 1px solid rgba(0,0,0,.5);
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  width:100%;
+}
+.panel{
+  box-sizing: border-box;
+  position: relative;
+  padding: 1em;
+  margin: 1em 0;
+  border-radius: 0.1em;
+  box-shadow: inset 1px 1px 0 0.5px rgba(255,255,255,.05),
+              1px 1px 0 0.5px rgba(255,255,255,.05),
+              inset -1px -1px 0 0.5px rgba(0,0,0,.2),
+              -1px -1px 0 0.5px rgba(0,0,0,.1);
+}
+.loading::after{
+  content: "";
+  display: block;
+  background: rgba(33, 37, 43, 0.8) url(../common/hourglass.svg) no-repeat center center;
+  position: absolute;
+  top:.5%;
+  left:.5%;
+  width:99%;
+  height:99%;
+}
+p.result{
+  display: inline; line-height: 2em;
+}
+input[type="radio"]{
+  display: none;
+}
+label{
+  margin: 0 10px;
+  padding: 3px 10px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+input{
+  margin: 0.1em 0;
+}
+input::-webkit-input-placeholder {color:Grey;}
+input::-moz-placeholder          {color:Grey;}/* Firefox 19+ */
+input:-moz-placeholder           {color:Grey;}/* Firefox 18- */
+input:-ms-input-placeholder      {color:Grey;}
+input[type="radio"]:checked + label{
+  color: #c678dd;
+}
+label:hover{
+  color: #5591e2;
+}
+input[type="text"], input[type="password"],textarea{
+  box-sizing: border-box;
+  background: #a7a9af;
+  border: none;
+  padding: 0.2em 0.5em;
+  color: #2d3e5b;
+  border-radius: 0.1em;
+  height:1.5em;
+  width: 10em;
+}
+input[type="text"]:focus, input[type="password"]:focus,textarea:focus,
+input[type="text"]:hover, input[type="password"]:hover,textarea:hover{
+  background: #e4e2e2;
+}
+input[type="submit"], button, input[type="reset"]{
+  background: orange;
+  box-sizing: border-box;
+  border:none;
+  height:1.5em;
+  color:white;
+  border-radius: 0.1em;
+  padding: 0 1em;
+  cursor:pointer;
+  vertical-align: middle;
+}
+button{
+  background: DarkCyan;
+}
+input[type="reset"]{
+  background: gray;
+}
+button.ghost, input.ghost{
+  background:transparent;
+  color:inherit;
+}
+.warning{background: Tomato;}
+.warning:hover{background: Coral;}
+input[type="submit"]:hover{
+  background: gold;
+}
+button.ghost:hover, input.ghost:hover{color:white;}
+button:hover{
+  background: LightSeaGreen;
+}
+input[type="reset"]:hover{
+  background: DarkGray;
+}
+input.color{
+  padding-left: 1em;
+  width:5.5em;
+  color:black;
+}
+input.color + label{
+  position: absolute;
+  margin: -0.1em 0 0 -6em;
+  pointer-events:none;
+  color:black;
+}
+.stratch{
+  display:flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-content: stretch;
+}
+.stratch > *{
+  margin: 0.1em;
+  flex-basis:25%;
+  width:3em !important;
+}
+
+.db{
+  border-radius: 2px;
+  width:100%;
+}
+.db thead tr td{
+  border-bottom: 1px solid #5591e2;
+  color:white;
+}
+.db tr:nth-of-type(even){
+  background: rgba(255,255,255,.03);
+}
+.db td{
+  text-align: center;
+}
+tr.edit td{
+  background: orange;
+  color:black;
+}
