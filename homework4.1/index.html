@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Homework 3.3</title>
+    <link rel="icon" type="image/x-icon" href="../common/favicon.ico">
+    <link rel="icon" type="image/png" href="../common/favicon.png">
+    <link rel="stylesheet" href="../common/css/normalize.css" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- Hightlighter -->
+    <link rel="stylesheet" href="../common/highlight/styles/atom-one-dark.css">
+    <script src="../common/highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+  </head>
+  <body>
+    <header>
+      <div class="wrapper">
+        <div class="logo"></div>
+        <h1>Paul Voloschuk<span>Homework 4.1</span></h1>
+        <a href="https://github.com/paulvoloschuk/saturdayfrontendacademy">Return to</a>
+      </div>
+    </header>
+    <div class="wrapper">
+      <div id="stopwatch">
+        <div class="display">
+          <div class="arrow"></div>
+          <p>00:00:00</p>
+        </div>
+        <div id="controls">
+          <div>
+            <button id="start_control">Start</button>
+            <button id="reset_control">Reset</button>
+          </div>
+          <div>
+            <button id="stop_control">Stop</button>
+            <button id="lap_control">Lap</button>
+          </div>
+        </div>
+        <ol id="laps" reversed>
+          <li>00:00:00</li>
+          <li><span>Worst</span>00:00:00</li>
+        </ol>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
