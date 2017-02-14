@@ -5,6 +5,8 @@ function userForm(rootElement){
   this.getRandom = function(){
     var url = 'https://randomuser.me/api/?inc=name,phone';
     var request;
+    Panel.rootElement.reset();
+    document.getElementsByClassName('edit')[0].className = '';
     if(window.XMLHttpRequest) request = new XMLHttpRequest();
     else if(window.ActiveXObject) request = new ActiveXObject("Microsoft.XMLHTTP");
     else return;
@@ -49,7 +51,6 @@ function userForm(rootElement){
         Table.editingRow = false;
       }
       else Table.addRow(data);
-      this.rootElement.reset();
     }else if(action == 'edit') {
       Table.editingRow.className = '';
       Table.editingRow = document.querySelector('button[data-id="'+id+'"]').parentNode.parentNode;
@@ -71,9 +72,12 @@ function userForm(rootElement){
 
 function userDBView(rootElement){
   this.rootElement = document.getElementById(rootElement);
+  this.className = this.rootElement.className;
   this.dataBase = [];
   this.buttons = [];
   this.editingRow = false;
+  this.sortCollumn = false;
+
 
   this.addRow = function(row){
     this.dataBase.push(row);
@@ -93,9 +97,9 @@ function userDBView(rootElement){
 
   this.update = function(){
     var HTML = '';
-    localStorage.clear()
+    localStorage.clear();
     for (var i = 0; i < this.dataBase.length; i++) {
-      HTML += '<tr><td>'+(i+1)+'</td><td>'+this.dataBase[i].title+'</td><td>'+this.dataBase[i].first+'</td><td>'+this.dataBase[i].last+'</td><td>'+this.dataBase[i].phone+'</td><td><button class="ghost action" data-id="'+i+'" data-action="edit">Edit</button><button class="ghost action warning inline" data-id="'+i+'" data-action="delete">Delete</button></td></tr>';
+      HTML += '<tr><td>'+(i+1)+'</td><td data-type="title">'+this.dataBase[i].title+'</td><td data-type="first">'+this.dataBase[i].first+'</td><td data-type="last">'+this.dataBase[i].last+'</td><td data-type="phone">'+this.dataBase[i].phone+'</td><td><button class="ghost action" data-id="'+i+'" data-action="edit">Edit</button><button class="ghost action warning inline" data-id="'+i+'" data-action="delete">Delete</button></td></tr>';
       localStorage.setItem(i, JSON.stringify(this.dataBase[i]));
     }
     this.rootElement.lastElementChild.innerHTML = HTML;
@@ -105,10 +109,31 @@ function userDBView(rootElement){
         Panel.doAction(e.target.attributes[2].value, e.target.attributes[1].value);
       }
     }
+    Panel.rootElement.reset();
+  }
+
+  this.sortBy = function(target){
+    var filterid = function(a, b){return (a.id > b.id) ? 1 : -1;};
+    var filterfirst = function(a, b){return (a.first > b.first) ? 1 : -1;};
+    var filterlast = function(a, b){return (a.last > b.last) ? 1 : -1;};
+    var filtertitle = function(a, b){return (a.title > b.title) ? 1 : -1;};
+    var filterphone = function(a, b){return (a.phone > b.phone) ? 1 : -1;};
+    var sortBy = target.attributes[1].value;
+    this.dataBase.sort(eval('filter' + sortBy));
+    if (sortBy == this.sortCollumn){
+      this.dataBase.reverse();
+      this.rootElement.className = this.className+' sort-'+this.sortCollumn+' decrement';
+      this.sortCollumn = false;
+    } else{
+      this.sortCollumn = sortBy;
+      this.rootElement.className = this.className+' sort-'+this.sortCollumn;
+    }
+    this.update();
   }
 
   var i = 0;
   var result = true;
+  this.sortControls = [];
   while(result){
     var result = localStorage.getItem(i);
     if(result){
@@ -116,6 +141,9 @@ function userDBView(rootElement){
       i++;
     }
   }
+  this.sortControls = document.getElementsByClassName('sort');
+  for (var j = 0; j < this.sortControls.length; j++)
+    this.sortControls[j].onclick = function(e){Table.sortBy(e.target);}
   this.update();
 }
 

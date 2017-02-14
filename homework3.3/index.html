@@ -29,7 +29,7 @@
           <input type="text" name="first" maxlength="32" autocomplete="on" placeholder="FirstName" pattern="^[A-zА-я]+$" required>
           <input type="text" name="last" maxlength="32" autocomplete="on" placeholder="LastName" pattern="^[A-zА-я]+$" required>
           <input type="text" name="phone" maxlength="32" autocomplete="on" placeholder="PhoneNumber" required>
-          <input type="hidden" name="id" value="">
+          <input type="text" name="id" value="">
         </div>
         <hr />
         <input type="submit" value="Send">
@@ -39,19 +39,19 @@
       <table id="db_view" class="db">
         <thead>
           <tr>
-            <td id="sort_id">
-              Id
+            <td>
+              №
             </td>
-            <td id="sort_title">
+            <td class="sort" data-type="title">
               Title
             </td>
-            <td id="sort_first">
+            <td class="sort" data-type="first">
               FirstName
             </td>
-            <td id="sort_last">
+            <td class="sort" data-type="last">
               LastName
             </td>
-            <td id="sort_phone">
+            <td class="sort" data-type="phone">
               PhoneNumber
             </td>
             <td>

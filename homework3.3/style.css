@@ -226,7 +226,47 @@ input.color + label{
 .db td{
   text-align: center;
 }
+.sort{
+  padding-left: 1em;
+  position:relative;
+}
+.sort-title *[data-type="title"],
+.sort-first *[data-type="first"],
+.sort-last *[data-type="last"],
+.sort-phone *[data-type="phone"]{
+  background: rgba(85, 145, 226, 0.05);
+}
+.sort-title thead *[data-type="title"],
+.sort-first thead *[data-type="first"],
+.sort-last thead *[data-type="last"],
+.sort-phone thead *[data-type="phone"]{
+  background: rgba(85, 145, 226, 0.5);
+}
+.sort-title thead *[data-type="title"]::before,
+.sort-first thead *[data-type="first"]::before,
+.sort-last thead *[data-type="last"]::before,
+.sort-phone thead *[data-type="phone"]::before{
+  opacity: 1;
+}
+.sort:hover{
+  background:#5591e2;
+  color:black;
+  cursor:pointer;
+}
+input[name="id"]{display: none;}
+.sort::before{
+  content:"▲";
+  display: block;
+  position:absolute;
+  font-size: 80%;
+  left: 0.1em;
+  top: 0.2em;
+  opacity: 0;
+}
+.decrement .sort::before{
+  transform: rotate(180deg);
+}
 tr.edit td{
-  background: orange;
+  background: orange !important;
   color:black;
 }
