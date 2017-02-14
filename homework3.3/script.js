@@ -6,7 +6,7 @@ function userForm(rootElement){
     var url = 'https://randomuser.me/api/?inc=name,phone';
     var request;
     Panel.rootElement.reset();
-    document.getElementsByClassName('edit')[0].className = '';
+    Table.update();
     if(window.XMLHttpRequest) request = new XMLHttpRequest();
     else if(window.ActiveXObject) request = new ActiveXObject("Microsoft.XMLHTTP");
     else return;
