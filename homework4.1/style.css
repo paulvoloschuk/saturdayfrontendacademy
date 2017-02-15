@@ -120,14 +120,24 @@ code{border:1px solid #2d3e5b;}
   background:url(clock-arrow.svg) no-repeat center top;
   position:absolute;
   left:50%;
+}
+.animate{
   animation: arrow 60s linear infinite;
+}
+.pause{
   animation-play-state: paused;
 }
 #controls div{
   padding: 25px 0;
   text-align: center;
 }
-button{
+#stopwatch:not(.active) #controls div:last-of-type{
+  display: none;
+}
+#stopwatch.active #controls div:first-of-type{
+  display: none;
+}
+#stopwatch button{
   background: darkgray;
   color:black;
   border:none;
@@ -137,34 +147,39 @@ button{
   margin: 0 10px;
   border-radius: 3px;
 }
-button:hover{
+#stopwatch button:hover{
   background-color: LightGray;
   cursor:pointer;
 }
-#start_control{background-color:SeaGreen;color:white;}
-#stop_control{background-color: FireBrick;color:white;}
-#start_control:hover{background-color: MediumSeaGreen;}
-#stop_control:hover{background-color: IndianRed;}
-#laps{
+#stopwatch #start_control{background-color:SeaGreen;color:white;}
+#stopwatch #stop_control{background-color: FireBrick;color:white;}
+#stopwatch #start_control:hover{background-color: MediumSeaGreen;}
+#stopwatch #stop_control:hover{background-color: IndianRed;}
+#stopwatch ul{
   margin:0;
-  padding:0 0 0 20px;
+  padding:0;
+  display: none;
 }
-#laps li{
+#stopwatch .active ul{
+  display: block;
+}
+#stopwatch li{
   position: relative;
-  line-height: 30px;
-  height:30px;
+  line-height: 40px;
+  height:40px;
   text-align: right;
   padding: 0 5px;
+  list-style: none;
 }
-#laps li::after{
+#stopwatch li::after{
   content: "";
   bottom:0;
-  left:-20px;
-  width: calc(100% + 20px);
+  left:0;
+  width: 100%;
   position: absolute;
   border-bottom: 1px solid darkgray;
 }
-#laps li span{
+#stopwatch li span{
   position: absolute;
   left: 10px;
 }

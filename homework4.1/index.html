@@ -24,8 +24,8 @@
     <div class="wrapper">
       <div id="stopwatch">
         <div class="display">
-          <div class="arrow"></div>
-          <p>00:00:00</p>
+          <div id="arrow" class="arrow"></div>
+          <p id="time">00:00:00</p>
         </div>
         <div id="controls">
           <div>
@@ -37,10 +37,13 @@
             <button id="lap_control">Lap</button>
           </div>
         </div>
-        <ol id="laps" reversed>
-          <li>00:00:00</li>
-          <li><span>Worst</span>00:00:00</li>
-        </ol>
+        <div id="memory">
+          <ul>
+            <li id="current_lap"></li>
+          </ul>
+          <ul id="laps">
+          </ul>
+        </div>
       </div>
     </div>
     <script src="script.js"></script>
