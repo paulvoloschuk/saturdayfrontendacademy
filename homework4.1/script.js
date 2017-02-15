@@ -41,6 +41,8 @@ function Stopwatch(){
     this.time = this.laptime = [0,0,0];
     this.currentLap = 0;
     this.laps = [];
+    this.bestLap = false;
+    this.worstLap = false;
 
   }
 
