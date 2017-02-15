@@ -94,6 +94,8 @@ code{border:1px solid #2d3e5b;}
   left: 50%;
   margin-left: -200px;
   width: 400px;
+  user-select: none;
+  cursor:default;
 }
 .display{
   width:400px;

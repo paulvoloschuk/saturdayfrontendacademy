@@ -1,8 +1,7 @@
 function formatTime(arr){
   var result = [];
-  for (var i = 0; i < arr.length; i++) {
+  for (var i = 0; i < arr.length; i++)
     result[i] = (arr[i].toString().length == 1) ? '0' + arr[i].toString() : arr[i];
-  }
   return result.reverse().join(':');
 }
 
@@ -65,9 +64,7 @@ function Stopwatch(){
       this.laptime[1] = 0;
       this.laptime[2]++;
     }
-    if(this.time[2] == 60){
-      this.stopRun();
-    }
+    if(this.time[2] == 60) this.stopRun();
     this.cLapContainer.innerHTML = '<span>'+(this.currentLap+1)+'.</span>'+formatTime(this.laptime);
     this.timeContainer.innerHTML = formatTime(this.time);
   }
@@ -79,20 +76,14 @@ function Stopwatch(){
     if(this.laps.length > 0){
       this.memoryContainer.className = 'active';
     }
-    if(this.laps.length > 2){
+    if(this.laps.length > 1){
       this.bestLap = this.laps.indexOf(this.laps.slice(0).sort()[0]);
       this.worstLap = this.laps.indexOf(this.laps.slice(0).sort().reverse()[0]);
     }
-    this.updateLapList();
-  }
-
-  this.updateLapList = function(){
-    console.log(this.bestLap, this.worstLap);
     var HTML = '', message;
-
     for (var i = this.laps.length-1; i >= 0; i--) {
-      if (i === this.bestLap) message = '<i>Best lap</i>';
-      else if (i === this.worstLap) message = '<i>Worst lap</i>';
+      if (i === this.bestLap) message = '<i style="color:DarkGreen">Best lap</i>';
+      else if (i === this.worstLap) message = '<i style="color:DarkRed">Worst lap</i>';
       else  message = '';
       HTML += '<li><span>'+(i+1)+'. '+message+'</span>'+this.laps[i]+'</li>';
     }
