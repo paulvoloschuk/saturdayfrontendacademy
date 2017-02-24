@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Homework 3.2</title>
+    <link rel="icon" type="image/x-icon" href="../common/favicon.ico">
+    <link rel="icon" type="image/png" href="../common/favicon.png">
+    <link rel="stylesheet" href="../common/css/normalize.css" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- Hightlighter -->
+    <link rel="stylesheet" href="../common/highlight/styles/atom-one-dark.css">
+    <script src="../common/highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+  </head>
+  <body>
+    <header>
+      <div class="wrapper">
+        <div class="logo"></div>
+        <h1>Paul Voloschuk<span>Homework 3.2</span></h1>
+        <a href="https://github.com/paulvoloschuk/saturdayfrontendacademy">Return to</a>
+      </div>
+    </header>
+      <div class="wrapper">
+        <h2>Square calculator</h2>
+        <p>Using the principles of object-oriented programming will create a calculator to find the square of shapes.</p>
+        <hr />
+        <div class="container" id="container">
+        <form class="field">
+          <h3>Form</h3>
+          <label>
+            <span>Figure type:</span>
+            <select name="figure">
+              <option value="circle">circle</option>
+              <option value="triangle">triangle</option>
+              <option value="rectangle">rectangle</option>
+              <option value="pentagon">pentagon</option>
+              <option value="hexagon">hexagon</option>
+            </select>
+          </label>
+          <label>
+            <span>radius:</span>
+            <input
+              type="text"
+              name="radius"
+              pattern="^[0-9]+$"
+              data-figures="circle"
+              maxlength="6"
+            />
+          </label>
+          <label>
+            <span>height:</span>
+            <input
+              type="text"
+              name="height"
+              pattern="^[0-9]+$"
+              data-figures="triangle, rectangle"
+              maxlength="6"
+            />
+          </label>
+          <label>
+            <span>width:</span>
+            <input
+              type="text"
+              name="width"
+              pattern="^[0-9]+$"
+              data-figures="triangle, rectangle"
+              maxlength="6"
+            />
+          </label>
+          <label>
+            <span>offset:</span>
+            <input
+              type="text"
+              name="offset"
+              pattern="^[0-9]+$"
+              data-figures=""
+              maxlength="6"
+            />
+          </label>
+          <label>
+            <span>side lenght:</span>
+            <input
+              type="text"
+              name="lenght"
+              pattern="^[0-9]+$"
+              data-figures="pentagon, hexagon"
+              maxlength="6"
+            />
+          </label>
+          <label><span></span><input type="submit" pattern="^[0-9]+$" data-figures="Calculate" /></label>
+          <h1 id="result"></h1>
+        </form>
+        <div class="field">
+          <h3>View</h3>
+          <svg version="1.1" id="hexagon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 350 350" style="enable-background:new 0 0 350 350;" xml:space="preserve">
+          <g>
+          	<path d="M100.2,44.5L250.7,45l74.8,130.5l-73.8,130H99.3l-74.8-131L100.2,44.5 M98.5,41.5L21,174.5l76.5,134h155.9
+          		l75.5-133L252.5,42L98.5,41.5L98.5,41.5z"/>
+          </g>
+          <text transform="matrix(1 0 0 1 157.2729 30.3213)" class="lenght">a</text>
+          </svg>
+          <svg version="1.1" id="pentagon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 350 350" style="enable-background:new 0 0 350 350;" xml:space="preserve">
+          <g>
+        		<path d="M175.2,44.8l137.2,100l-52.9,161h-170l-52-161L175.2,44.8 M175.2,41.1L34,143.7l53.4,165.2h174.4L316,143.7
+        			L175.2,41.1L175.2,41.1z"/>
+          </g>
+          <text transform="matrix(1 0 0 1 157.2729 299.3213)" class="lenght">a</text>
+          </svg>
+          <svg version="1.1" id="rectangle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 350 350" style="enable-background:new 0 0 350 350;" xml:space="preserve">
+          <g>
+          	<path d="M305.5,44.5v261h-261v-261H305.5 M308.5,41.5h-267v267h267V41.5L308.5,41.5z"/>
+          </g>
+          <text transform="matrix(1 0 0 1 151.8291 295.8213)" class="width">w</text>
+          <text transform="matrix(1 0 0 1 56.3814 186.3213)" class="height">h</text>
+          </svg>
+          <svg version="1.1" id="triangle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 350 350" style="enable-background:new 0 0 350 350;" xml:space="preserve">
+           <g>
+           <line x1="175" y1="41.8" x2="175" y2="305.5"/>
+           <path d="M303.6,44.8L175,302.1L46.4,44.8H303.6 M308.5,41.8h-267l133.5,267L308.5,41.8L308.5,41.8z"/>
+          </g>
+          <text transform="matrix(1 0 0 1 66.8291 36.3213)" class="width">w</text>
+          <text transform="matrix(1 0 0 1 181.4295 106.8213)" class="height">h</text>
+          </svg>
+          <svg version="1.1" id="circle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 350 350" style="enable-background:new 0 0 350 350;" xml:space="preserve">
+          <g>
+            <line x1="42.9" y1="175.3" x2="175" y2="175.3"/>
+          	<path d="M175,43.1c34.9,0,67.6,13.6,92.3,38.2c24.6,24.6,38.2,57.4,38.2,92.3s-13.6,67.6-38.2,92.3
+          		c-24.6,24.6-57.4,38.2-92.3,38.2s-67.6-13.6-92.3-38.2c-24.6-24.6-38.2-57.4-38.2-92.3S58.1,106,82.7,81.4
+          		C107.4,56.7,140.1,43.1,175,43.1 M175,40.1c-73.7,0-133.5,59.8-133.5,133.5S101.3,307.1,175,307.1s133.5-59.8,133.5-133.5
+          		S248.7,40.1,175,40.1L175,40.1z"/>
+          </g>
+          <text transform="matrix(1 0 0 1 54.2586 167.3213)" class="radius">r</text>
+          </svg>
+        </div>
+      </div>
+      </div>
+    <script src="script.js"></script>
+  </body>
+</html>
