@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 20.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 350 350" style="enable-background:new 0 0 350 350;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#5591E2;}
+	.st1{fill:#F20404;}
+	.st2{font-family:'ArialMT';}
+	.st3{font-size:26.7195px;}
+	.st4{fill:#D24A43;}
+	.st5{fill:none;stroke:#D24A43;stroke-width:3;stroke-miterlimit:10;}
+</style>
+<g>
+	<path class="st0" d="M100.2,44.5L250.7,45l74.8,130.5l-73.8,130H99.3l-74.8-131L100.2,44.5 M98.5,41.5L21,174.5l76.5,134h155.9
+		l75.5-133L252.5,42L98.5,41.5L98.5,41.5z"/>
+	<g>
+		<path class="st1" d="M175.2,44.8l137.2,100l-52.9,161h-170l-52-161L175.2,44.8 M175.2,41.1L34,143.7l53.4,165.2h174.4L316,143.7
+			L175.2,41.1L175.2,41.1z"/>
+	</g>
+</g>
+<text transform="matrix(1 0 0 1 54.2586 167.3213)" class="st2 st3">r =</text>
+<g>
+	<path class="st1" d="M305.5,44.5v261h-261v-261H305.5 M308.5,41.5h-267v267h267V41.5L308.5,41.5z"/>
+</g>
+<g>
+	<path class="st4" d="M303.6,44.8L175,302.1L46.4,44.8H303.6 M308.5,41.8h-267l133.5,267L308.5,41.8L308.5,41.8z"/>
+</g>
+<g>
+	<line class="st5" x1="175" y1="41.8" x2="175" y2="305.5"/>
+</g>
+<g>
+	<path class="st4" d="M175,43.1c34.9,0,67.6,13.6,92.3,38.2c24.6,24.6,38.2,57.4,38.2,92.3s-13.6,67.6-38.2,92.3
+		c-24.6,24.6-57.4,38.2-92.3,38.2s-67.6-13.6-92.3-38.2c-24.6-24.6-38.2-57.4-38.2-92.3S58.1,106,82.7,81.4
+		C107.4,56.7,140.1,43.1,175,43.1 M175,40.1c-73.7,0-133.5,59.8-133.5,133.5S101.3,307.1,175,307.1s133.5-59.8,133.5-133.5
+		S248.7,40.1,175,40.1L175,40.1z"/>
+</g>
+<g>
+	<line class="st5" x1="42.9" y1="175.3" x2="175" y2="175.3"/>
+</g>
+</svg>

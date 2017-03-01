@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Homework 4.2</title>
+    <link rel="icon" type="image/x-icon" href="../common/favicon.ico">
+    <link rel="icon" type="image/png" href="../common/favicon.png">
+    <link rel="stylesheet" href="../common/css/normalize.css" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- Hightlighter -->
+    <!-- <link rel="stylesheet" href="../common/highlight/styles/atom-one-dark.css">
+    <script src="../common/highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script> -->
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="wrapper">
+        <div class="logo"></div>
+        <h1>Paul Voloschuk<span>Homework 4.2</span></h1>
+        <a href="https://github.com/paulvoloschuk/saturdayfrontendacademy">Return to</a>
+      </div>
+    </header>
+      <div class="wrapper">
+        <h2>Complex form validation</h2>
+        <p>Simple search with highlight and matchings count base on <span class="code">RegExp{}</span></p>
+        <form id="registration" autocomplete="off">
+          <h3>Registration</h3>
+          <div class="progress">
+            <span class="level active">1</span>
+            <span class="level">2</span>
+            <span class="level">3</span>
+          </div>
+          <div class="slider">
+            <fieldset>
+              <p>Please fill the form</p>
+              <label>
+                <input
+                  type="text"
+                  pattern-name="email"
+                  minlength="4"
+                  maxlength="32"
+                  name="login"
+                  required
+                  value="email@com.ua"
+                >
+                <span class="placeholder">email</span>
+                <span class="error"></span>
+              </label>
+              <label>
+                <input
+                  type="password"
+                  pattern-name="password"
+                  maxlength="32"
+                  name="password1"
+                  value="asdasdASD123"
+                  required
+                >
+                <span class="placeholder">password</span>
+                <span class="error"></span>
+              </label>
+              <label>
+                <input
+                  type="password"
+                  maxlength="32"
+                  name="password2"
+                  equal="password1"
+                  required
+                  value="asdasdASD123"
+                >
+                <span class="placeholder">password</span>
+                <span class="error"></span>
+            </label>
+            </fieldset>
+            <fieldset>
+              <p>Ways to recover your access</p>
+              <label>
+                <input
+                  type="text"
+                  name="email"
+                  pattern-name="email"
+                >
+                <span class="placeholder">placeholder</span>
+                <span class="error"></span>
+              </label>
+              <label>
+                <input
+                  type="text"
+                  name="phone"
+                  pattern-name="phone"
+                >
+                <span class="placeholder">placeholder</span>
+                <span class="error"></span>
+              </label>
+            </fieldset>
+            <fieldset>
+              <p>Some optional information</p>
+              <label><input type="text" name="name"><span class="placeholder">name</span></label>
+              <label><input type="text" name="family"><span class="placeholder">surname</span></label>
+              <label>
+                <input type="number" style="width:4em;" size="2" min="1" max="31" name="day" />
+                <input type="number" style="width:4em;" size="2" min="1" max="12" name="mounth" />
+                <input type="number" style="width:6.48em;" size="4" min="1920" max="2007" name="year" />
+                <span class="placeholder">age</span>
+              </label>
+            </fieldset>
+          </div>
+          <div class="actions">
+            <button type="button" name="back" disabled>Back</button>
+            <button type="button" name="next">Next</button>
+          </div>
+        </form>
+      </div>
+  </body>
+</html>
