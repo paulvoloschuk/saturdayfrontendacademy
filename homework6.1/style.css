@@ -104,6 +104,15 @@ form{
   width:30em;
   overflow: hidden;
 }
+.complete *:not(.alert),
+.complete span.alert::before{
+  opacity:0;
+}
+.complete span.alert{
+  transform: scale(3) translateY(50px);
+}
+
+
 .slider{
   width:300%;
   transition: all 0.3s ease-in-out;
@@ -161,6 +170,7 @@ form h3{
   top:1em;
   right:3.25em;
   background: #21252b;
+  transition: opacity 0.01s linear;
 }
 .level:not(:first-of-type)::after{
   display: block;
@@ -171,7 +181,7 @@ form h3{
   height:calc(1em - 10px);
   top:calc(1em + 5px);
   left:-4.5em;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out, opacity 0.01s linear;
 }
 .level.active{
   background:green;
@@ -198,7 +208,7 @@ label .placeholder{
 label .error{
   position:absolute;
   line-height: 2.2em;
-  color: red;
+  color: Brown;
   right:0.6em;
   top:calc(50% - 1em);
   font-weight: bold;
@@ -206,7 +216,7 @@ label .error{
   margin-top:-1.5em;
   font-size:70%;
 }
-input{
+input, select{
   width:100%;
   padding:0.2em 0.5em;
   color:white;
@@ -216,19 +226,15 @@ input{
   border:none;
   border-bottom: 1px solid gray;
 }
-input[type="number"],
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button{
-  -moz-appearance: textfield;
-  -webkit-appearance: none;
-    margin: 0;
+select option{
+  color: black;
 }
 input:hover,
 input:focus{
   border-color: white;
 }
 .focus + span,
-input[type="number"].focus ~ span{
+select.focus ~ span{
   margin-top:-1.5em;
   font-size:80%;
 }
@@ -250,4 +256,12 @@ button[name="next"]{
 }
 button:disabled{
   opacity:0;
+}
+
+/* Extra */
+#result{
+  padding: 1em;
+}
+#result p span{
+  color: steelblue;
 }

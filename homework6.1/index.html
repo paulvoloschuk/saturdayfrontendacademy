@@ -23,12 +23,12 @@
     </header>
       <div class="wrapper">
         <h2>Complex form validation</h2>
-        <p>Simple search with highlight and matchings count base on <span class="code">RegExp{}</span></p>
+        <p>Complex registration form with several framesets, animations, output, and validation.</p>
         <form id="registration" autocomplete="off">
           <h3>Registration</h3>
-          <div class="progress">
+          <div class="progress alert">
             <span class="level active">1</span>
-            <span class="level">2</span>
+            <span id="indicator" class="level alert">2</span>
             <span class="level">3</span>
           </div>
           <div class="slider">
@@ -42,9 +42,8 @@
                   maxlength="32"
                   name="login"
                   required
-                  value="email@com.ua"
                 >
-                <span class="placeholder">email</span>
+                <span class="placeholder">*email</span>
                 <span class="error"></span>
               </label>
               <label>
@@ -53,10 +52,9 @@
                   pattern-name="password"
                   maxlength="32"
                   name="password1"
-                  value="asdasdASD123"
                   required
                 >
-                <span class="placeholder">password</span>
+                <span class="placeholder">*password</span>
                 <span class="error"></span>
               </label>
               <label>
@@ -66,9 +64,8 @@
                   name="password2"
                   equal="password1"
                   required
-                  value="asdasdASD123"
                 >
-                <span class="placeholder">password</span>
+                <span class="placeholder">*password</span>
                 <span class="error"></span>
             </label>
             </fieldset>
@@ -80,7 +77,7 @@
                   name="email"
                   pattern-name="email"
                 >
-                <span class="placeholder">placeholder</span>
+                <span class="placeholder">extra email</span>
                 <span class="error"></span>
               </label>
               <label>
@@ -89,19 +86,33 @@
                   name="phone"
                   pattern-name="phone"
                 >
-                <span class="placeholder">placeholder</span>
+                <span class="placeholder">phone number</span>
                 <span class="error"></span>
               </label>
             </fieldset>
             <fieldset>
               <p>Some optional information</p>
-              <label><input type="text" name="name"><span class="placeholder">name</span></label>
-              <label><input type="text" name="family"><span class="placeholder">surname</span></label>
+              <label><input type="text" name="name" pattern-name="word" maxlength="32" >
+                <span class="placeholder">name</span>
+                <span class="error"></span>
+              </label>
               <label>
-                <input type="number" style="width:4em;" size="2" min="1" max="31" name="day" />
-                <input type="number" style="width:4em;" size="2" min="1" max="12" name="mounth" />
-                <input type="number" style="width:6.48em;" size="4" min="1920" max="2007" name="year" />
+                <input type="text" pattern-name="word" maxlength="32" name="family">
+                <span class="placeholder">surname</span>
+                <span class="error"></span>
+              </label>
+              <label>
+                <select name="day" style="width:4em">
+                  <option value="" selected></option>
+                </select>
+                <select name="mounth" style="width:4em">
+                  <option value="" selected></option>
+                </select>
+                <select name="year" style="width:6.48em">
+                  <option value="" selected></option>
+                </select>
                 <span class="placeholder">age</span>
+                <span class="error"></span>
               </label>
             </fieldset>
           </div>
@@ -110,6 +121,8 @@
             <button type="button" name="next">Next</button>
           </div>
         </form>
+        <hr />
+        <p id="result"></p>
       </div>
   </body>
 </html>
