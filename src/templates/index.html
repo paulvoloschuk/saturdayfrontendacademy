@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>SVG animated graph</title>
+    <link href="https://fonts.googleapis.com/css?family=Lobster|Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/ui.css">
+    <link rel="stylesheet" href="css/project7.css">
+    <script src="js/project7.js" charset="utf-8"></script>
+    <script>
+      window.onload = function(){
+        var graph1 = new ColumnGraph('graph1', randomArray({max: 90}));
+        var graph2 = new DottedGraph('graph2', randomArray({min: 5, max: 520, size: 100, dimensions: 2}));
+        var graph3 = new LinearGraph('graph3', [randomArray({max: 60, min: 50}), randomArray({max: 90, min: 10}), randomArray({max:110, integer: true})]);
+      }
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      //= header.html
+
+      <h1>Complex SVG Graph</h1>
+      <article>
+        <div class="col2">
+          <div class="bg blue">
+            <h2>Column graph</h2>
+            <svg id="graph1" class="graph">
+            </svg>
+          </div>
+        </div>
+        <div class="col2">
+          <div class="bg red">
+            <h2>Dotted graph</h2>
+            <svg id="graph2" class="graph">
+
+            </svg>
+          </div>
+        </div>
+        <div class="col3">
+          <div class="bg green">
+            <h2>Linear graph</h2>
+            <svg id="graph3" class="graph">
+
+            </svg>
+          </div>
+        </div>
+        <div class="col1">
+          <div class="bg">
+            <h2>Radial graph</h2>
+            <svg id="graph4" class="graph">
+
+            </svg>
+          </div>
+        </div>
+      </article>
+
+      <footer>
+        <div class="logo">
+        </div>
+        <div class="contacts">
+          <p class="author">Created by <a href="#">Paul Voloschuk</a></p>
+          <p class="lesson">Exercise #7</p>
+          <p class="project-name">Animated SVG Graph</p>
+          <hr />
+          <p>website: <a href="#">paul-voloschuk.com</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

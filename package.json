@@ -1,0 +1,36 @@
+{
+  "name": "saturdayfrontendacademy",
+  "version": "1.0.0",
+  "description": "configurator for gulp ",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npm install express",
+    "start": "gulp",
+    "build": "gulp build"
+  },
+  "author": "Paul Voloschuk",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^6.5.0",
+    "browser-sync": "^2.17.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-concat-css": "^2.3.0",
+    "gulp-imagemin": "^3.0.3",
+    "gulp-sass": "^3.1.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-rigger": "^0.5.8",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^2.0.0",
+    "gulp-watch": "^4.3.10",
+    "imagemin-pngquant": "^5.0.0",
+    "postcss": "^5.2.4",
+    "postcss-cli": "^2.6.0",
+    "rimraf": "^2.5.4"
+  },
+  "devDependencies": {
+    "gulp-scss": "^1.4.0"
+  }
+}

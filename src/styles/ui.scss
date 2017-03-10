@@ -1,0 +1,200 @@
+// Variables
+  $baseColor: #fff;
+  $subColor: #f3f3f3;
+  $redColor:  #ff4451;
+  $greenColor: #74c543;
+  $blueColor: #72c6f7;
+  $borderRadius: .3em;
+
+  // font-family: 'Roboto Condensed', sans-serif;
+  // font-family: 'Lobster', cursive;
+html, body{
+  min-height: 100%;
+  width:100%;
+}
+body{
+  background: #6289a8;
+  background-size: contain;
+  background: linear-gradient(135deg,  #6289a8 0%,#223252 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6289a8', endColorstr='#223252',GradientType=1 );
+  padding: 1em 0;
+  cursor: default;
+  font-family: 'Roboto Condensed', sans-serif;
+  .wrapper > h1{
+    color: $baseColor;
+    text-shadow: .1em .1em .2em rgba(0,0,0,.2);
+  }
+}
+.wrapper{
+  margin: 0 auto;
+  width: 95%;
+  max-width: 1100px;
+}
+header{
+  padding: .5em 1em;
+  display: table;
+  width: 100%;
+  background: $baseColor;
+  color: $blueColor;
+  border-radius: $borderRadius;
+  filter: drop-shadow(.2em .2em .3em rgba(0,0,0,.3));
+  box-sizing: border-box;
+  & > *{
+    display: table-cell;
+    margin: 0;
+    font-weight: 400;
+  }
+  h1{
+    font-size: 120%;
+    .logo{
+      height:.7em;
+      transform: scale(2);
+      margin-right: .5em;
+    }
+    a{
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+  ul{
+    filter: drop-shadow(.2em .2em .3em rgba(0,0,0,.3));
+    position: absolute;
+    right: -1em;
+    top: .1em;
+    list-style: none;
+    padding: 1.7em 0 0 0;
+    a{
+      display: block;
+      z-index: 10;
+      color: #6a6a6a;
+      border-top: 1px solid lightgray;
+      transition: .5s all .2s ease-in-out, background .2s ease-in-out, color .2s ease-in-out;
+      overflow: hidden;
+      position: relative;
+      text-decoration: none;
+      height: 0;
+      opacity: 0;
+      white-space: nowrap;
+      background: $subColor;
+      padding: 0 1em;
+      &:hover{
+        background: $blueColor;
+        color: $baseColor;
+        &::after{
+          border-bottom-color: $blueColor !important;
+        }
+      }
+    }
+    li:first-of-type a{
+      border-radius: $borderRadius $borderRadius 0 0;
+      overflow: visible;
+      border-top: none;
+      &::after{
+        content: "";
+        display: block;
+        position: absolute;
+        top: -1em;
+        right: 1em;
+        width: 0;
+        height: 0;
+        border-bottom: 1em solid $subColor;
+        border-left: .7em solid transparent;
+        border-right: .7em solid transparent;
+        transition: border-color .2s ease-in-out;
+        z-index: 1;
+      }
+    }
+    li:last-of-type a{
+      border-radius: 0 0 $borderRadius $borderRadius;
+    }
+  }
+  div{
+    width: 1em;
+    padding: 0 0 0 2em;
+    position: relative;
+    white-space: nowrap;
+    &:hover ul a{
+      height: 1em;
+      padding: 1em 1em;
+      opacity: 1;
+    }
+  }
+}
+footer{
+  margin-top: 2em;
+  display: flex;
+  color: $baseColor;
+  .logo{
+    width:10em;
+    margin-right: 1em;
+    background: $baseColor url(../img/author.jpg) 50% 50% no-repeat;
+    background-size: cover;
+  }
+  a{
+    text-decoration: none;
+    color: $blueColor;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+  hr{
+    border:none;
+    border-bottom: 1px solid rgba(255,255,255,.5);
+  }
+}
+article{
+  display: flex;
+  position: relative;
+  flex-flow: row wrap;
+  align-content: stretch;
+  flex-basis: 100%;
+  z-index: 0;
+  &>div{
+    padding: .5em;
+    box-sizing: border-box;
+  }
+  .col1{
+    width:25%;
+  }
+  .col2{
+    width:50%;
+  }
+  .col3{
+    width:75%;
+  }
+  .col4{
+    width:100%;
+  }
+  .bg{
+    color: black;
+    stroke: black;
+    background-color: $baseColor;
+    border-radius: $borderRadius;
+    filter: drop-shadow(.2em .2em .3em rgba(0,0,0,.3));
+    padding: 1em;
+
+    &.red{
+      background-color: $redColor;
+      color: $baseColor;
+      stroke: $baseColor;
+      fill: $baseColor;
+    }
+    &.blue{
+      background-color: $blueColor;
+      color: $baseColor;
+      stroke: $baseColor;
+      fill: $baseColor;
+    }
+    &.green{
+      background-color: $greenColor;
+      color: $baseColor;
+      stroke: $baseColor;
+      fill: $baseColor;
+    }
+  }
+  h2{
+    margin: .1em 0;
+    text-align: center;
+    font-weight: normal;
+  }
+}
