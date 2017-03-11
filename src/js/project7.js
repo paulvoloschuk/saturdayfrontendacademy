@@ -37,8 +37,8 @@ var ProtoGraph = {
       minY: 20,
       maxY: this.rootElement.clientHeight - 20
     };
-    if (this.data[0] instanceof Array) {
-      var maxY = 0, maxX = 0;
+    var maxY = 0, maxX = 0;
+    if (this.data[0] instanceof Array && this.data[0].length == 2) {
       for (var i = 0; i < this.data.length; i++) {
         if (maxY < this.data[i][0]) maxY = this.data[i][0];
         if (maxX < this.data[i][1]) maxX = this.data[i][1];
@@ -46,6 +46,14 @@ var ProtoGraph = {
       this.maxYvalue = maxY;
       this.relativeValueY = this.workSpace.maxY / maxY;
       this.relativeValueX = this.workSpace.maxX / maxX;
+    } else if (this.data[0] instanceof Array && this.data[0].length > 2) {
+      for (var i = 0; i < this.data.length; i++) {
+        for (var j = 0; j < this.data[i].length; j++) {
+          if (maxY < this.data[i][j]) maxY = this.data[i][j];
+        }
+      }
+      this.maxYvalue = maxY;
+      this.relativeValueY = this.workSpace.maxY / this.maxYvalue;
     } else {
       this.maxYvalue = Math.max.apply(null, this.data);
       this.relativeValueY = this.workSpace.maxY / this.maxYvalue;
@@ -177,8 +185,33 @@ function LinearGraph(svgId, data){
   this.workSpaceCalculations();
   this.drawGuideLines();
   // Building a graph
-  for (var i = 0; i < this.data.length; i++) {
-    console.log(this.data[i]);
+  var globalGroup = this.createElement('g'),
+      polyGroup,
+      circle,
+      polyline,
+      points,
+      x, y;
+  globalGroup.setMultyAttributes({class: 'values'});
+  for (var p = 0; p < this.data.length; p++) {
+    points = [];
+    polyGroup = this.createElement('g');
+    polyGroup.setMultyAttributes({class: 'poly'});
+    for (var i = 0; i <  this.data[p].length; i++) {
+      x = (this.workSpace.maxX / this.data[p].length * i)+20;
+      y = this.workSpace.maxY - (this.data[p][i] * this.relativeValueY)+10;
+      points.push(x+','+y);
+      circle = this.createElement('circle');
+      circle.setMultyAttributes({cx: x,
+                                cy: y,
+                                r:  5
+                              });
+      polyGroup.appendChild(circle);
+    }
+    polyline = this.createElement('polyline');
+    polyline.setMultyAttributes({points: points.join(' ')});
+    polyGroup.appendChild(polyline);
+    globalGroup.appendChild(polyGroup);
   }
-
+  this.rootElement.appendChild(globalGroup);
+  this.drawLevels();
 }
